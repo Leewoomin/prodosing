@@ -1,9 +1,7 @@
 package com.min.prodosing.entity;
 
 import com.min.prodosing.dto.MemberDTO;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -12,6 +10,8 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "member")
 public class MemberEntity extends BaseEntity{
 
@@ -20,8 +20,7 @@ public class MemberEntity extends BaseEntity{
     private Long member_id;
 
     @Column(unique = true)
-    private String user_id;
-
+    private String userid;
     private String password;
     private String password_check;
     private String name;
@@ -40,7 +39,7 @@ public class MemberEntity extends BaseEntity{
     public static MemberEntity toMemberEntity(MemberDTO memberDTO) {
         return MemberEntity.builder()
                 .member_id(memberDTO.getMember_id())
-                .user_id(memberDTO.getUser_id())
+                .userid(memberDTO.getUserid())
                 .password(memberDTO.getPassword())
                 .password_check(memberDTO.getPassword_check())
                 .name(memberDTO.getName())

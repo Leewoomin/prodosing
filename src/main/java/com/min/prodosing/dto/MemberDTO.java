@@ -11,7 +11,7 @@ import lombok.*;
 @Builder
 public class MemberDTO {
     private Long member_id;
-    private String user_id;
+    private String userid;
     private String password;
     private String password_check;
     private String name;
@@ -32,7 +32,7 @@ public class MemberDTO {
     public static MemberDTO toMemberDTO(MemberEntity memberEntity) {
         return MemberDTO.builder()
                 .member_id(memberEntity.getMember_id())
-                .user_id(memberEntity.getUser_id())
+                .userid(memberEntity.getUserid())
                 .password(memberEntity.getPassword())
                 .password_check(memberEntity.getPassword_check())
                 .name(memberEntity.getName())

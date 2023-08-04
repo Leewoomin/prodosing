@@ -6,6 +6,8 @@ import com.min.prodosing.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -19,5 +21,15 @@ public class MemberService {
             e.printStackTrace();
             return "fail";
         }
+    }
+
+    public String idCheck(String userid) {
+        Optional<MemberEntity> byUserId = memberRepository.findByUserid(userid);
+        if(byUserId.isPresent()) {
+            return null;
+        }else {
+            return "ok";
+        }
+
     }
 }

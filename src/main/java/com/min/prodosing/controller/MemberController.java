@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequiredArgsConstructor
@@ -69,13 +70,16 @@ public class MemberController {
             return "/message/message";
         }else {
             model.addAttribute("message", "회원가입을 실패했습니다.");
-            model.addAttribute("searchUrl", "/join");
             return "/message/message_fail";
         }
-
     }
 
-
+    //아이디 중복체크
+    @PostMapping("/join/id-check")
+    public @ResponseBody String idCheck(@RequestParam("userid") String userid){
+        String checkResult = memberService.idCheck(userid);
+        return checkResult;
+    }
 
 
 

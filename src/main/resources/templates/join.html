@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>WM_회원가입 페이지</title>
@@ -7,7 +7,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <!--Jquery-->
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+<!--    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>-->
+    <script
+            src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+            crossorigin="anonymous">
+    </script>
 </head>
 <body>
 <style>
@@ -41,12 +46,41 @@
 <form name="join" action="/join" method="post">
     <div class="row g-3 mt-5">
         <div class="col-auto">
-            <input name="user_id" type="text" placeholder="아이디" class="form-control">
+            <input name="userid" id="userid" type="text" placeholder="아이디" class="form-control">
         </div>
         <div class="col-auto">
-            <input type="button" class="btn btn-outline-secondary" value="중복확인" >
+            <button type="button" class="btn btn-outline-secondary" onclick="idCheck()">중복확인</button>
         </div>
     </div>
+<div class="row g-3 mt-1 ml-2" id="check-result"></div>
+    <!-- 아이디 중복체크 -->
+    <script th:inline="javascript">
+        const idCheck = () => {
+        const id = document.getElementById("userid").value;
+        const checkResult = document.getElementById("check-result");
+        $.ajax({
+            // 요청방식: post, url: "email-check", 데이터: 이메일
+            type: "post",
+            url: "/join/id-check",
+            data: {
+                "userid": id
+            },
+            success: function(result) {
+                if(result == "ok") {
+                    checkResult.style.color = "green";
+                    checkResult.innerHTML = "사용가능한 아이디 입니다.";
+                }else {
+                    checkResult.style.color = "red";
+                    checkResult.innerHTML = "이미사용중인 아이디 입니다.";
+                }
+            },
+            error: function(err) {
+                console.log("에러발생", err);
+            }
+        });
+    }
+    </script>
+
     <div class="row g-3 mt-4">
         <div class="col-auto">
             <input name="password" type="password" placeholder="비밀번호" class="form-control">
@@ -84,28 +118,20 @@
     </div>
 
     <script type="text/javascript">
- $(document).ready(function(){
-    //년도 selectbox만들기
-    for(var i = 1900 ; i <= 2023 ; i++) {
-        $('#year').append('<option value="' + i + '">' + i + '</option>');
-    }
 
-    // 월별 selectbox 만들기
-    for(var i=1; i <= 12; i++) {
-        var birth_m = i > 9 ? i : "0"+i ;
-        $('#month').append('<option value="' + birth_m + '">' + birth_m + '</option>');
+    $(document).ready(
+    function () {
+        for (var i = 2023; i > 1920; i--) {
+            $('#year').append('<option value="' + i + '">' + i + '</option>');
+        }
+        for (var i = 1; i < 13; i++) {
+            $('#month').append('<option value="' + i + '">' + i + '</option>');
+        }
+        for (var i = 1; i < 32; i++) {
+            $('#day').append('<option value="' + i + '">' + i + '</option>');
+        }
     }
-
-    // 일별 selectbox 만들기
-    for(var i=1; i <= 31; i++) {
-        var dd = i > 9 ? i : "0"+i ;
-        $('#day').append('<option value="' + dd + '">' + dd+ '</option>');
-    }
-    $("#year  > option[value="+year+"]").attr("selected", "true");
-    $("#month  > option[value="+mon+"]").attr("selected", "true");
-    $("#day  > option[value="+day+"]").attr("selected", "true");
-
-})
+);
 </script>
 
     <div class="row g-3 mt-4">
