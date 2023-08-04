@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>WM_회원가입 페이지</title>
+    <!--BootStap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!--Jquery-->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+<style>
+    body{
+        width: 900px;
+        margin: 0px auto;
+        text-align: center;
+    }
+    hr{
+        height: 1px;
+        background-color: gray;
+    }
+    .form-control{
+         border-left-width:0;
+         border-right-width:0;
+         border-top-width:0;
+         border-bottom-width:1;
+        }
+
+    footer{
+        height: 200px;
+    }
+
+</style>
+<body>
+<div style="margin-top: 50px;"><h1><b>회 원 가 입</b></h1></div>
+<div style="margin-top: 150px; float: left; width: 900px; display: block;"><h5 style="text-align: left;"><b>회원정보입력</b></h5>
+    <hr style="margin-top: 0px;"></div>
+<div style="clear:both;"></div>
+
+<form name="join" action="/join" method="post">
+    <div class="row g-3 mt-5">
+        <div class="col-auto">
+            <input name="user_id" type="text" placeholder="아이디" class="form-control">
+        </div>
+        <div class="col-auto">
+            <input type="button" class="btn btn-outline-secondary" value="중복확인" >
+        </div>
+    </div>
+    <div class="row g-3 mt-4">
+        <div class="col-auto">
+            <input name="password" type="password" placeholder="비밀번호" class="form-control">
+        </div>
+    </div>
+    <div class="row g-3 mt-4">
+        <div class="col-auto">
+            <input name="password_check" type="password" placeholder="비밀번호확인" class="form-control">
+        </div>
+    </div>
+    <div class="row g-3 mt-4">
+        <div class="col-auto">
+            <input name="name" type="text" placeholder="이름" class="form-control">
+        </div>
+    </div>
+    <div class="row g-3 mt-4">
+        <div class="col-auto mr-5">
+            <div class="form-control">
+                <label class="mr-5">성별</label>
+                <label class="mr-3">비공개 <input type="radio" checked="checked" name="gender" value="비공개"></label>
+                <label class="mr-3">남자 <input type="radio" name="gender" value="남자"></label>
+                <label>여자 <input type="radio" name="gender" value="여자"></label>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row g-3 mt-4">
+        <div class="col-auto">
+            <input name="phone" type="text" placeholder="핸드폰번호" class="form-control">
+        </div>
+        <div>
+            <label style="margin-top: 10px; font-size: 14px;"> 숫자만입력 ( -제외 )</label>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+ $(document).ready(function(){
+    //년도 selectbox만들기
+    for(var i = 1900 ; i <= 2023 ; i++) {
+        $('#year').append('<option value="' + i + '">' + i + '</option>');
+    }
+
+    // 월별 selectbox 만들기
+    for(var i=1; i <= 12; i++) {
+        var birth_m = i > 9 ? i : "0"+i ;
+        $('#month').append('<option value="' + birth_m + '">' + birth_m + '</option>');
+    }
+
+    // 일별 selectbox 만들기
+    for(var i=1; i <= 31; i++) {
+        var dd = i > 9 ? i : "0"+i ;
+        $('#day').append('<option value="' + dd + '">' + dd+ '</option>');
+    }
+    $("#year  > option[value="+year+"]").attr("selected", "true");
+    $("#month  > option[value="+mon+"]").attr("selected", "true");
+    $("#day  > option[value="+day+"]").attr("selected", "true");
+
+})
+</script>
+
+    <div class="row g-3 mt-4">
+        <div class="ml-3 ">
+            <select name="birth_y" id="year"  class="form-control selectpicker noborder ">
+                <option selected disabled hidden>년</option>
+            </select>
+        </div>
+        <div class="ml-3 ">
+            <select name="birth_m" id="month"  class="form-control selectpicker noborder ">
+                <option selected disabled hidden>월</option>
+            </select>
+        </div>
+        <div class="ml-3">
+            <select name="birth_d" id="day"  class="form-control selectpicker noborder ">
+                <option selected disabled hidden>일</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row g-3 mt-4">
+        <div class="col-auto">
+            <input name="email" type="text" placeholder="Email" class="form-control">
+        </div>
+        <div class="mt-2">
+            @
+        </div>
+        <div class="ml-3">
+            <select name="email_site"  class="form-control selectpicker noborder ">
+                <option value="직접입력">직접입력</option>
+                <option value="naver.com">naver.com</option>
+                <option value="daum.net">daum.net</option>
+                <option value="nate.com">nate.com</option>
+            </select>
+        </div>
+        <div class="col-auto">
+            <input type="button" class="btn btn-outline-secondary" value="Email인증" >
+        </div>
+    </div>
+    <div class="row g-3 mt-4">
+        <div class="col-auto">
+            <div class="form-control mb-3">
+                관심있는 아티스트 <label style="font-size: 14px;">(중복선택 가능)</label>
+            </div>
+        </div>
+    </div>
+    <div class="container mb-5">
+        <div class="row row-cols " style="text-align: left;">
+            <label class="col-2 mr-5"><input type="checkbox" name="favorite" value="SG워너비"> SG워너비</label>
+            <label class="col-2 mr-5"><input type="checkbox" name="favorite" value="정승환"> 정승환</label>
+            <label class="col-2 mr-5"><input type="checkbox" name="favorite" value="김유림"> 김유림</label>
+            <label class="col-2 mr-5"><input type="checkbox" name="favorite" value="뉴진스"> 뉴진스</label>
+            <label class="col-2 mr-5"><input type="checkbox" name="favorite" value="아이브"> 아이브</label>
+            <label class="col-2 mr-5"><input type="checkbox" name="favorite" value="BTS"> BTS</label>
+            <label class="col-2 mr-5"><input type="checkbox" name="favorite" value="지코"> 지코</label>
+            <label class="col-2 mr-5"><input type="checkbox" name="favorite" value="크러쉬"> 크러쉬</label>
+            <label class="col-2 mr-5"><input type="checkbox" name="favorite" value="(여자)아이들"> (여자)아이들</label>
+            <label class="col-2 mr-5"><input type="checkbox" name="favorite" value="던말릭"> 던말릭</label>
+            <label class="col-2 mr-5"><input type="checkbox" name="favorite" value="WSG워너비"> WSG워너비</label>
+            <label class="col-2 mr-5"><input type="checkbox" name="favorite" value="아이유"> 아이유</label>
+            <label class="col-2 mr-5"><input type="checkbox" name="favorite" value="10cm"> 10cm</label>
+            <label class="col-2 mr-5"><input type="checkbox" name="favorite" value="ITZY"> ITZY</label>
+            <label class="col-2 mr-5"><input type="checkbox" name="favorite" value="박효신"> 박효신</label>
+            <div class="mt-2">
+                <input name="favorite" type="text" placeholder="아티스트 직접입력" class="form-control">
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <input type="submit" class="btn btn-outline-primary" value="가입하기" >
+    </div>
+</form>
+</body>
+
+<footer>
+    <hr style="margin-top: 80px;">
+    <div class="mb-50">a</div>
+</footer>
+</html>
