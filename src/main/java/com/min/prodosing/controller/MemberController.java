@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
@@ -18,7 +20,7 @@ public class MemberController {
 
     @GetMapping("/join")
     public String join() {
-        return "join";
+        return "member/join";
     }
 
     @PostMapping("/join")
@@ -34,14 +36,19 @@ public class MemberController {
             memberDTO.setGender("S");
         }
 
+
         //생년월일 년+월+일
-        if(null == memberDTO.getBirth_y() && null ==  memberDTO.getBirth_m() && null == memberDTO.getBirth_d()) {
-            memberDTO.setBirth(null);
-        }else {
-            String birth = memberDTO.getBirth_y() +
-                            memberDTO.getBirth_m() + memberDTO.getBirth_d();
-                            memberDTO.setBirth(birth);
+        if(null == memberDTO.getBirth_y() ) {
+            memberDTO.setBirth_y("");
         }
+        if(null==memberDTO.getBirth_m()) {
+            memberDTO.setBirth_m("");
+        }
+        if(null==memberDTO.getBirth_d()) {
+            memberDTO.setBirth_d("");
+        }
+        String birth = memberDTO.getBirth_y().concat( memberDTO.getBirth_m().concat(memberDTO.getBirth_d()));
+
 
         //email id+사이트
         String email;
@@ -77,16 +84,8 @@ public class MemberController {
     //아이디 중복체크 검색 새창
     @GetMapping("/join/idCheckSearch")
     public String idCheckSearch() {
-        return "idCheckSearch";
+        return "member/idCheckSearch";
     }
-
-    //아이디 중복체크 완료 후 사용하기
-//    @PostMapping("/join/idCheckSearch")
-//    public String idCheckResult(@RequestParam("resultid") String resultid, Model model) {
-//        model.addAttribute("resultid", resultid);
-//        return "redirect:/join";
-//    }
-
 
     //아이디 중복체크
     @PostMapping("/join/id-check")
@@ -100,8 +99,33 @@ public class MemberController {
         }
     }
 
+    //로그인 페이지 이동
+    @GetMapping("/login")
+    public String loginForm() {
+        return "member/login";
+    }
 
+    //로그인
+    @PostMapping("login")
+    public String login(MemberDTO memberDTO, HttpSession session, Model model) {
+        boolean loginResult = memberService.login(memberDTO);
+        if(loginResult == true) {
+            session.setAttribute("loginId",memberDTO.getUserid());
+            return "redirect:index";
+        }else {
+            model.addAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다.");
+            return "message_fail";
+        }
+    }
 
+    //로그아웃
+    @GetMapping("logout")
+    public String logout(HttpSession session, Model model) {
+        session.invalidate();
+        model.addAttribute("message", "로그아웃이 완료되었습니다");
+        model.addAttribute("searchUrl", "index");
+        return "message/message";
+    }
 
 
 

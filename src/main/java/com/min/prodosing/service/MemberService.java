@@ -4,6 +4,7 @@ import com.min.prodosing.dto.MemberDTO;
 import com.min.prodosing.entity.MemberEntity;
 import com.min.prodosing.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -31,5 +32,20 @@ public class MemberService {
             return "ok";
         }
 
+    }
+
+    public boolean login(MemberDTO memberDTO) {
+        Optional<MemberEntity> byUserid = memberRepository.findByUserid(memberDTO.getUserid());
+        MemberEntity memberEntity = byUserid.get();
+
+        if(byUserid.isPresent()) {
+            if(memberDTO.getPassword().equals(memberEntity.getPassword())) {
+                return true;
+            }else {
+                return false;
+            }
+        }else {
+            return false;
+        }
     }
 }

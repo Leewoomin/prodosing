@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인</title>
+    <!--BootStap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!--Jquery-->
+    <!--    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>-->
+    <script
+            src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+            crossorigin="anonymous">
+    </script>
+
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+<a href="/">메인페이지</a>
+<div class="wrapper">
+    <div class="container">
+
+            <form name="login" action="/login" method="post">
+                <h1 style="">로 그 인</h1>
+                <input type="text" name="userid" placeholder="ID">
+                <input type="password" name="password" placeholder="Password">
+                <button type="submit" class="form_btn" style="width: 112px;">로그인</button>
+                <button type="button" class="form_btn" th:onclick="|location.href='@{join}'|">회원가입</button>
+            </form>
+
+
+    </div>
+</div>
+<script th:inline="javascript">
+
+</script>
+</body>
+<footer>
+
+</footer>
+</html>
