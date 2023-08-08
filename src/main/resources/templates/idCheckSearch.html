@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!--BootStap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <script
+            src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+            crossorigin="anonymous">
+    </script>
+</head>
+<style>
+    body {
+        margin: 0px auto;
+        text-align: center;
+    }
+</style>
+<body>
+
+
+
+
+
+<script th:inline="javascript">
+
+</script>
+<div><input type="text" name="userid" id="userid" placeholder="아이디검색" class="form-control" onblur="idInput()"></div>
+<div class="row g-3 ml-2 mt-2 mb-3" id="check-result"></div>
+<button type="button" class="btn btn-outline-primary mr-2" onclick="idCheck()">중복확인</button>
+<input type="submit" id="submitBtn" class="btn btn-outline-primary" value="아이디 사용하기" onclick="idResult()"></input>
+
+<script th:inline="javascript">
+
+
+<!--아이디 사용하기 버튼-->
+        function idResult() {
+            opener.document.getElementById("userid").value = document.getElementById("userid").value;
+            window.close();
+        }
+
+
+<!--중복확인(새창에서)-->
+        var result_data;
+        var id = document.getElementById("userid").value;
+
+        const submitButton = document.getElementById('submitBtn');
+        submitButton.disabled = true;
+
+        <!-- 아이디 중복체크 -->
+
+        const idCheck = () => {
+        const id = document.getElementById("userid").value;
+        const checkResult = document.getElementById("check-result");
+        $.ajax({
+            // 요청방식: post, url: "id-check", 데이터: 아이디
+            type: "post",
+            url: "/join/id-check",
+            data: {
+                "userid": id
+            },
+            async: false,
+            success: function(result) {
+                if(result == "ok") {
+                    checkResult.style.color = "green";
+                    checkResult.innerHTML = "사용가능한 아이디 입니다.";
+                    result_data = "ok";
+
+                <!--아이디 사용하기 버튼 활성화-->
+                    submitButton.disabled = false;
+                }else if(result == "fail"){
+                    checkResult.style.color = "red";
+                    checkResult.innerHTML = "이미사용중인 아이디 입니다.";
+                    submitButton.disabled = true;
+                    result_data = "fail";
+                }else {
+                    checkResult.style.color = "red";
+                    checkResult.innerHTML = "아이디를 입력해 주세요.";
+                    submitButton.disabled = true;
+                    result_data = "fail";
+                }
+
+            },
+            error: function(err) {
+                console.log("에러발생", err);
+            }
+        });
+        }
+
+
+
+        function idInput() {
+            if(result_data == "ok" && id != document.getElementById("userid").value) {
+                submitButton.disabled = true;
+            }
+        }
+
+
+</script>
+</body>
+</html>

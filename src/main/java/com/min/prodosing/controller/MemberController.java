@@ -74,11 +74,30 @@ public class MemberController {
         }
     }
 
+    //아이디 중복체크 검색 새창
+    @GetMapping("/join/idCheckSearch")
+    public String idCheckSearch() {
+        return "idCheckSearch";
+    }
+
+    //아이디 중복체크 완료 후 사용하기
+//    @PostMapping("/join/idCheckSearch")
+//    public String idCheckResult(@RequestParam("resultid") String resultid, Model model) {
+//        model.addAttribute("resultid", resultid);
+//        return "redirect:/join";
+//    }
+
+
     //아이디 중복체크
     @PostMapping("/join/id-check")
     public @ResponseBody String idCheck(@RequestParam("userid") String userid){
-        String checkResult = memberService.idCheck(userid);
-        return checkResult;
+        String checkResult;
+        if(userid=="") {
+            return checkResult = "";
+        }else {
+            checkResult = memberService.idCheck(userid);
+            return checkResult;
+        }
     }
 
 

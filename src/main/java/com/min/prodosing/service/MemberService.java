@@ -26,7 +26,7 @@ public class MemberService {
     public String idCheck(String userid) {
         Optional<MemberEntity> byUserId = memberRepository.findByUserid(userid);
         if(byUserId.isPresent()) {
-            return null;
+            return "fail";
         }else {
             return "ok";
         }
