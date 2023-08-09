@@ -19,6 +19,7 @@
         width: 900px;
         margin: 0px auto;
         text-align: center;
+        background: #ebecf0;
     }
     hr{
         height: 1px;
@@ -29,16 +30,47 @@
          border-right-width:0;
          border-top-width:0;
          border-bottom-width:1;
+         border-radius: 12px;
+        background: #eee;
+        box-shadow: inset 7px 2px 10px #babebc, inset -5px -5px 12px #fff;
+        border: 0;
+        padding: 10px;
+        padding-top: 8px;
+        margin: 8px 0;
         }
 
     footer{
         height: 200px;
     }
 
+    .textBox {
+        border-radius: 12px;
+        background: #eee;
+        box-shadow: inset 7px 2px 10px #babebc, inset -5px -5px 12px #fff;
+        border: 0;
+        padding: 10px;
+        margin: 3px 0;
+    }
+
+    .checkBox {
+        border-radius: 12px;
+        background: #eee;
+        box-shadow: inset 7px 2px 10px #babebc, inset -5px -5px 12px #fff;
+        border: 0;
+        padding: 10px;
+        padding-bottom: 3px;
+        margin: 8px 0;
+        color: #757575;
+    }
+
+    #idBtn, #emailBtn {
+        border-radius: 10px;
+        margin: 8px 0;
+    }
+
 </style>
 <body>
-
-<body>
+<div><a href="/">메인페이지</a></div>
 <div style="margin-top: 50px;"><h1><b>회 원 가 입</b></h1></div>
 <div style="margin-top: 150px; float: left; width: 900px; display: block;"><h5 style="text-align: left;"><b>회원정보입력</b></h5>
     <hr style="margin-top: 0px;"></div>
@@ -47,11 +79,10 @@
 <form name="join" action="/join" method="post">
     <div class="row g-3 mt-5">
         <div class="col-auto">
-            <input name="userid" id="userid" type="text" placeholder="아이디" class="form-control" readonly>
+            <input name="userid" id="userid" type="text" placeholder="아이디" class="textBox" readonly>
         </div>
         <div class="col-auto">
-<!--            <button type="button" class="btn btn-outline-secondary" onclick="idCheck()">중복확인</button>-->
-            <button type="button" class="btn btn-outline-secondary"
+            <button type="button" id="idBtn" class="btn btn-outline-secondary"
                     onclick="window.open('/join/idCheckSearch', 'idCheck', 'width=400, height=200, left=800, top=350')">중복확인</button>
         </div>
     </div>
@@ -63,12 +94,12 @@
 
     <div class="row g-3 mt-4">
         <div class="col-auto">
-            <input name="password" type="password" id="password" placeholder="비밀번호" class="form-control">
+            <input name="password" type="password" id="password" placeholder="비밀번호" class="textBox">
         </div>
     </div>
     <div class="row g-3 mt-4">
         <div class="col-auto">
-            <input name="password_check" id="password_check" type="password" placeholder="비밀번호확인" class="form-control" onblur="pwCheck()">
+            <input name="password_check" id="password_check" type="password" placeholder="비밀번호확인" class="textBox" onblur="pwCheck()">
         </div>
     </div>
     <div class="row g-3 mt-1 ml-2" id="pwCheckResult"></div>
@@ -80,12 +111,12 @@
     </script>
     <div class="row g-3 mt-4">
         <div class="col-auto">
-            <input name="name" type="text" placeholder="이름" class="form-control">
+            <input name="name" type="text" placeholder="이름" class="textBox">
         </div>
     </div>
     <div class="row g-3 mt-4">
         <div class="col-auto mr-5">
-            <div class="form-control">
+            <div class="checkBox">
                 <label class="mr-5">성별</label>
                 <label class="mr-3">비공개 <input type="radio" checked="checked" name="gender" value="비공개"></label>
                 <label class="mr-3">남자 <input type="radio" name="gender" value="남자"></label>
@@ -97,10 +128,10 @@
 
     <div class="row g-3 mt-4">
         <div class="col-auto">
-            <input name="phone" type="text" placeholder="핸드폰번호" class="form-control">
+            <input name="phone" type="text" placeholder="핸드폰번호" class="textBox">
         </div>
         <div>
-            <label style="margin-top: 10px; font-size: 14px;"> 숫자만입력 ( -제외 )</label>
+            <label style="margin-top: 10px; font-size: 14px padding-top: 10px;"> 숫자만입력 ( -제외 )</label>
         </div>
     </div>
 
@@ -123,17 +154,17 @@
 
     <div class="row g-3 mt-4">
         <div class="ml-3 ">
-            <select name="birth_y" id="year"  class="form-control selectpicker noborder ">
+            <select name="birth_y" id="year"  class="form-control">
                 <option selected disabled hidden>년</option>
             </select>
         </div>
         <div class="ml-3 ">
-            <select name="birth_m" id="month"  class="form-control selectpicker noborder ">
+            <select name="birth_m" id="month"  class="form-control">
                 <option selected disabled hidden>월</option>
             </select>
         </div>
         <div class="ml-3">
-            <select name="birth_d" id="day"  class="form-control selectpicker noborder ">
+            <select name="birth_d" id="day"  class="form-control">
                 <option selected disabled hidden>일</option>
             </select>
         </div>
@@ -141,7 +172,7 @@
 
     <div class="row g-3 mt-4">
         <div class="col-auto">
-            <input name="email" type="text" placeholder="Email" class="form-control">
+            <input name="email" type="text" placeholder="Email" class="textBox">
         </div>
         <div class="mt-2">
             @
@@ -155,13 +186,13 @@
             </select>
         </div>
         <div class="col-auto">
-            <input type="button" class="btn btn-outline-secondary" value="Email인증" >
+            <input type="button" id="emailBtn" class="btn btn-outline-secondary" value="Email인증" >
         </div>
     </div>
     <div class="row g-3 mt-4">
         <div class="col-auto">
-            <div class="form-control mb-3">
-                관심있는 아티스트 <label style="font-size: 14px;">(중복선택 가능)</label>
+            <div class="textBox">
+                관심있는 아티스트 <label style="font-size: 14px;" >(중복선택 가능)</label>
             </div>
         </div>
     </div>

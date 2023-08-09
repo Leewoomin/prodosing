@@ -1,28 +1,96 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<!--
+	Fractal by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Main</title>
-    <!--BootStap-->
+    <title>Main Page</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="css/main.css" />
+<!--    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
-<style>
-body {
-    width: 1800px;
-    margin: 0px auto;
-    text-align: center;
-}
-div {
-    width: 1800px;
-}
-</style>
-<body>
-<div class="text-right mt-3 mr-4">
-    <span th:if="${session.loginId}" th:text="|${session.loginId}님 환영합니다|"></span>
-    <a th:if="${session.loginId}" href="/logout" class="ml-2">로그아웃</a>
-    <a th:unless="${session.loginId}" href="/login" class="mr-2 ml-3">로그인</a>
-    <a th:unless="${session.loginId}" href="/join">회원가입</a>
+<div id="headerdiv">
+    <div id="left">Prodosing</div>
+    <div id="right">
+        <span th:if="${session.loginId}" th:text="|${session.loginId}님 환영합니다.|"></span>
+        <button type="button" th:if="${session.loginId}" class="btn btn-outline-danger btn-sm" th:onclick="|location.href='@{logout}'|" >로그아웃</button>
+        <button type="button" th:unless="${session.loginId}" class="btn btn-outline-info btn-sm" th:onclick="|location.href='@{login}'|" >로그인</button>
+        <button type="button" th:unless="${session.loginId}" class="btn btn-outline-info btn-sm" th:onclick="|location.href='@{join}'|" >회원가입</button>
+    </div>
 </div>
-<div><h1>메인페이지!!</h1></div>
+<body class="is-preload">
+
+<!-- Header -->
+<header id="header">
+    <div class="content">
+        <!-- <h1>ProDoSing</h1>
+        <p>ProDoSing은 아티스트의 성공을 기원합니다.</p> -->
+        <!-- <ul class="actions">
+            <li><a href="#" class="button primary icon solid fa-download">Download</a></li>
+            <li><a href="#one" class="button icon solid fa-chevron-down scrolly">Learn More</a></li>
+        </ul> -->
+    </div>
+</header>
+
+
+<!-- Two -->
+<section id="two" class="wrapper">
+    <div class="inner alt">
+        <section class="spotlight">
+            <div class="image"><img src="images/mike3.jpg" alt="" /></div>
+            <div class="content">
+                <h3>Magna sed ultrices</h3>
+                <p>Morbi mattis ornare ornare. Duis quam turpis, gravida at leo elementum elit fusce accumsan dui libero, quis vehicula lectus ultricies eu. In convallis amet leo non sapien iaculis efficitur consequat lorem ipsum.</p>
+            </div>
+        </section>
+        <section class="spotlight">
+            <div class="image" ><img src="images/info.jpg" alt="" /></div>
+            <div class="content">
+                <h3>Ultrices nullam aliquam</h3>
+                <p>Morbi mattis ornare ornare. Duis quam turpis, gravida at leo elementum elit fusce accumsan dui libero, quis vehicula lectus ultricies eu. In convallis amet leo non sapien iaculis efficitur consequat lorem ipsum.</p>
+            </div>
+        </section>
+        <section class="spotlight">
+            <div class="image"><img src="images/sponsor.jpg" alt="" /></div>
+            <div class="content">
+                <h3>Aliquam sed magna</h3>
+                <p>Morbi mattis ornare ornare. Duis quam turpis, gravida at leo elementum elit fusce accumsan dui libero, quis vehicula lectus ultricies eu. In convallis amet leo non sapien iaculis efficitur consequat lorem ipsum.</p>
+            </div>
+        </section>
+        <section class="spotlight">
+            <div class="image" ><img src="images/calendar.jpg" alt="" /></div>
+            <div class="content">
+                <h3>Ultrices nullam aliquam</h3>
+                <p>Morbi mattis ornare ornare. Duis quam turpis, gravida at leo elementum elit fusce accumsan dui libero, quis vehicula lectus ultricies eu. In convallis amet leo non sapien iaculis efficitur consequat lorem ipsum.</p>
+            </div>
+        </section>
+    </div>
+</section>
+
+
+
+
+<!-- Footer -->
+<footer id="footer">
+    <ul class="icons">
+        <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+        <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+        <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+    </ul>
+    <p class="copyright">&copy; Untitled. Credits: <a href="http://html5up.net">HTML5 UP</a></p>
+</footer>
+
+<!-- Scripts -->
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.scrolly.min.js"></script>
+<script src="js/browser.min.js"></script>
+<script src="js/breakpoints.min.js"></script>
+<script src="js/util.js"></script>
+<script src="js/main.js"></script>
+
 </body>
 </html>
