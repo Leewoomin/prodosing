@@ -68,6 +68,8 @@ public class MemberController {
         if(!"".equals(favorite) && favorite.substring(favorite.length()-1,favorite.length()).equals(",")) {
             favorite = favorite.substring(0,memberDTO.getFavorite().length()-1);
             memberDTO.setFavorite(favorite);
+        }else {
+            memberDTO.setFavorite(null);
         }
         String result = memberService.join(memberDTO);
 
@@ -108,13 +110,16 @@ public class MemberController {
     //로그인
     @PostMapping("login")
     public String login(MemberDTO memberDTO, HttpSession session, Model model) {
-        boolean loginResult = memberService.login(memberDTO);
-        if(loginResult == true) {
+        System.out.println("status= "+memberDTO.getSatus());
+        String loginResult = memberService.login(memberDTO);
+
+        if(loginResult != null) {
             session.setAttribute("loginId",memberDTO.getUserid());
+            session.setAttribute("status", loginResult);
             return "redirect:index";
         }else {
             model.addAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다.");
-            return "message_fail";
+            return "message/message_fail";
         }
     }
 
@@ -127,7 +132,65 @@ public class MemberController {
         return "message/message";
     }
 
+    //아티스트 등록
+    @GetMapping("artistJoin")
+    public String artistJoin() {
+        return "member/artistJoin";
+    }
 
+    @PostMapping("/artistJoin")
+    public String artistJoin(MemberDTO memberDTO, Model model) {
+        //성별
+        String gender = memberDTO.getGender();
+        if(gender.equals("남자")) {
+            memberDTO.setGender("M");
+        }else if(gender.equals("여자")){
+            memberDTO.setGender("W");
+        }else {
+            memberDTO.setGender("S");
+        }
+
+
+        //생년월일 년+월+일
+        if(null == memberDTO.getBirth_y() ) {
+            memberDTO.setBirth_y("");
+        }
+        if(null==memberDTO.getBirth_m()) {
+            memberDTO.setBirth_m("");
+        }
+        if(null==memberDTO.getBirth_d()) {
+            memberDTO.setBirth_d("");
+        }
+        String birth = memberDTO.getBirth_y().concat( memberDTO.getBirth_m().concat(memberDTO.getBirth_d()));
+
+
+        //email id+사이트
+        String email;
+        if(memberDTO.getEmail() == null) {
+            if (memberDTO.getEmail_site().equals("직접입력")) {
+                email = memberDTO.getEmail();
+            } else {
+                email = memberDTO.getEmail() + "@" + memberDTO.getEmail_site();
+            }
+            memberDTO.setEmail(email);
+        }else {
+            memberDTO.setEmail(null);
+        }
+
+        //status "A"(artist)
+        memberDTO.setSatus("A");
+
+        String result = memberService.join(memberDTO);
+
+        if(result.equals("success")){
+            model.addAttribute("message", "회원가입이 완료되었습니다.");
+            model.addAttribute("searchUrl", "/");
+            return "/message/message";
+        }else {
+            model.addAttribute("message", "회원가입을 실패했습니다.");
+            return "/message/message_fail";
+        }
+    }
 
 
 

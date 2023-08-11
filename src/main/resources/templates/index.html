@@ -10,30 +10,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="css/main.css" />
-<!--    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>-->
+    <link rel="stylesheet" href="css/footer.css" />
+    <noscript><link rel="stylesheet" href="css/noscript.css" /></noscript>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 </head>
-<div id="headerdiv">
-    <div id="left">Prodosing</div>
-    <div id="right">
-        <span th:if="${session.loginId}" th:text="|${session.loginId}님 환영합니다.|"></span>
-        <button type="button" th:if="${session.loginId}" class="btn btn-outline-danger btn-sm" th:onclick="|location.href='@{logout}'|" >로그아웃</button>
-        <button type="button" th:unless="${session.loginId}" class="btn btn-outline-info btn-sm" th:onclick="|location.href='@{login}'|" >로그인</button>
-        <button type="button" th:unless="${session.loginId}" class="btn btn-outline-info btn-sm" th:onclick="|location.href='@{join}'|" >회원가입</button>
-    </div>
+<div>
+    <th:block th:include="header"></th:block>
 </div>
+
 <body class="is-preload">
 
 <!-- Header -->
 <header id="header">
-    <div class="content">
-        <!-- <h1>ProDoSing</h1>
-        <p>ProDoSing은 아티스트의 성공을 기원합니다.</p> -->
-        <!-- <ul class="actions">
-            <li><a href="#" class="button primary icon solid fa-download">Download</a></li>
-            <li><a href="#one" class="button icon solid fa-chevron-down scrolly">Learn More</a></li>
-        </ul> -->
-    </div>
 </header>
 
 
@@ -43,29 +32,37 @@
         <section class="spotlight">
             <div class="image"><img src="images/mike3.jpg" alt="" /></div>
             <div class="content">
-                <h3>Magna sed ultrices</h3>
-                <p>Morbi mattis ornare ornare. Duis quam turpis, gravida at leo elementum elit fusce accumsan dui libero, quis vehicula lectus ultricies eu. In convallis amet leo non sapien iaculis efficitur consequat lorem ipsum.</p>
+                <h3>아티스트 등록</h3>
+                <p>아티스트로 등록하고 공연 일정을 팬들에게 공유할수 있어요. <br>
+                    팀의 스타일과 앨범 등의 정보를 등록하고 더 많은 팬들을 만들어 보세요.</p>
+                <button class="w-btn-outline w-btn-indigo-outline" type="button" th:onclick="|location.href='@{artistJoin}'|">
+                    아트스트 등록하러 가기 →
+                </button>
             </div>
         </section>
         <section class="spotlight">
             <div class="image" ><img src="images/info.jpg" alt="" /></div>
             <div class="content">
-                <h3>Ultrices nullam aliquam</h3>
-                <p>Morbi mattis ornare ornare. Duis quam turpis, gravida at leo elementum elit fusce accumsan dui libero, quis vehicula lectus ultricies eu. In convallis amet leo non sapien iaculis efficitur consequat lorem ipsum.</p>
+                <h3>아티스트 정보</h3>
+                <p>다양한 아티스트들의 정보를 확인하고 <br>
+                    본인의 음악취향과 맞는 아티스트를 찾아보세요!
+                </p>
             </div>
         </section>
         <section class="spotlight">
             <div class="image"><img src="images/sponsor.jpg" alt="" /></div>
             <div class="content">
-                <h3>Aliquam sed magna</h3>
-                <p>Morbi mattis ornare ornare. Duis quam turpis, gravida at leo elementum elit fusce accumsan dui libero, quis vehicula lectus ultricies eu. In convallis amet leo non sapien iaculis efficitur consequat lorem ipsum.</p>
+                <h3>아티스트 후원하기</h3>
+                <p>좋은 공연을 보여준 아티스트에게, 평소 좋아했던 아티스트에게,<br>
+                    응원하는 아티스트에게 후원할 수 있어요.</p>
             </div>
         </section>
         <section class="spotlight">
             <div class="image" ><img src="images/calendar.jpg" alt="" /></div>
             <div class="content">
-                <h3>Ultrices nullam aliquam</h3>
-                <p>Morbi mattis ornare ornare. Duis quam turpis, gravida at leo elementum elit fusce accumsan dui libero, quis vehicula lectus ultricies eu. In convallis amet leo non sapien iaculis efficitur consequat lorem ipsum.</p>
+                <h3>원하는 날짜의 공연 찾기</h3>
+                <p>원하는 날짜와 시간에 어떤 아티스트의 공연이 있는지 검색해보세요. <br>
+                    다양한 아티스트들의 공연을 감상하고 즐겨보세요!</p>
             </div>
         </section>
     </div>
@@ -76,12 +73,9 @@
 
 <!-- Footer -->
 <footer id="footer">
-    <ul class="icons">
-        <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-        <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-        <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-    </ul>
-    <p class="copyright">&copy; Untitled. Credits: <a href="http://html5up.net">HTML5 UP</a></p>
+    <div>
+        <th:block th:include="footer"></th:block>
+    </div>
 </footer>
 
 <!-- Scripts -->

@@ -13,11 +13,13 @@
             integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
             crossorigin="anonymous">
     </script>
-
     <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="css/footer.css" />
 </head>
+<div>
+    <th:block th:include="header"></th:block>
+</div>
 <body>
-<a href="/">메인페이지</a>
 <div class="wrapper">
     <div class="container">
 
@@ -36,7 +38,10 @@
 
 </script>
 </body>
-<footer>
-
+<!-- Footer -->
+<footer id="footer">
+    <div>
+        <th:block th:include="footer"></th:block>
+    </div>
 </footer>
 </html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>아티스트 회원가입</title>
+    <!--BootStap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/join.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <!--Jquery-->
+    <!--    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>-->
+    <script
+            src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+            crossorigin="anonymous">
+    </script>
+</head>
+
+<body>
+<div>
+    <th:block th:include="header"></th:block>
+</div>
+<div id="body">
+    <div style="margin-top: 50px;"><h1><b>아 티 스 트 등 록</b></h1></div>
+    <div style="margin-top: 150px; float: left; width: 900px; display: block;"><h5 style="text-align: left;"><b>아티스트 정보입력</b></h5>
+        <hr style="margin-top: 0px;"></div>
+    <div style="clear:both;"></div>
+
+    <form name="join" action="/artistJoin" method="post">
+        <div class="row g-3 mt-5">
+            <div class="col-auto">
+                <input name="userid" id="userid" type="text" placeholder="아이디" class="textBox" readonly>
+            </div>
+            <div class="col-auto">
+                <button type="button" id="idBtn" class="btn btn-outline-secondary"
+                        onclick="window.open('/join/idCheckSearch', 'idCheck', 'width=400, height=200, left=800, top=350')">중복확인</button>
+            </div>
+        </div>
+        <div class="row g-3 mt-1 ml-2" id="check-result"></div>
+        <p id="useridOutput"></p>
+        <script th:inline="javascript">
+
+        </script>
+
+        <div class="row g-3 mt-4">
+            <div class="col-auto">
+                <input name="password" type="password" id="password" placeholder="비밀번호" class="textBox">
+            </div>
+        </div>
+        <div class="row g-3 mt-4">
+            <div class="col-auto">
+                <input name="password_check" id="password_check" type="password" placeholder="비밀번호확인" class="textBox" onblur="pwCheck()">
+            </div>
+        </div>
+        <div class="row g-3 mt-1 ml-2" id="pwCheckResult"></div>
+
+        <!-- 비밀번호 일치 확인 -->
+        <script th:inline="javascript">
+
+        </script>
+        </script>
+        <div class="row g-3 mt-4">
+            <div class="col-auto">
+                <input name="name" type="text" placeholder="이름" class="textBox">
+            </div>
+        </div>
+        <div class="row g-3 mt-4">
+            <div class="col-auto">
+                <input name="team_name" type="text" placeholder="팀명" class="textBox">
+            </div>
+        </div>
+        <div class="row g-3 mt-4">
+            <div class="col-auto mr-5">
+                <div class="checkBox">
+                    <label class="mr-5">성별</label>
+                    <label class="mr-3">비공개 <input type="radio" checked="checked" name="gender" value="비공개"></label>
+                    <label class="mr-3">남자 <input type="radio" name="gender" value="남자"></label>
+                    <label>여자 <input type="radio" name="gender" value="여자"></label>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row g-3 mt-4">
+            <div class="col-auto">
+                <input name="phone" type="text" placeholder="핸드폰번호" class="textBox">
+            </div>
+            <div>
+                <label style="margin-top: 10px; font-size: 14px padding-top: 10px;"> 숫자만입력 ( -제외 )</label>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+
+    $(document).ready(
+    function () {
+        for (var i = 2023; i > 1920; i--) {
+            $('#year').append('<option value="' + i + '">' + i + '</option>');
+        }
+        for (var i = 1; i < 13; i++) {
+            $('#month').append('<option value="' + i + '">' + i + '</option>');
+        }
+        for (var i = 1; i < 32; i++) {
+            $('#day').append('<option value="' + i + '">' + i + '</option>');
+        }
+    }
+);
+</script>
+
+        <div class="row g-3 mt-4">
+            <div class="ml-3 ">
+                <select name="birth_y" id="year"  class="form-control">
+                    <option selected disabled hidden>년</option>
+                </select>
+            </div>
+            <div class="ml-3 ">
+                <select name="birth_m" id="month"  class="form-control">
+                    <option selected disabled hidden>월</option>
+                </select>
+            </div>
+            <div class="ml-3">
+                <select name="birth_d" id="day"  class="form-control">
+                    <option selected disabled hidden>일</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row g-3 mt-4">
+            <div class="col-auto">
+                <input name="email" type="text" placeholder="Email" class="textBox">
+            </div>
+            <div class="mt-2">
+                @
+            </div>
+            <div class="ml-3">
+                <select name="email_site"  class="form-control selectpicker noborder ">
+                    <option value="직접입력">직접입력</option>
+                    <option value="naver.com">naver.com</option>
+                    <option value="daum.net">daum.net</option>
+                    <option value="nate.com">nate.com</option>
+                </select>
+            </div>
+            <div class="col-auto">
+                <input type="button" id="emailBtn" class="btn btn-outline-secondary" value="Email인증" >
+            </div>
+        </div>
+        <div class="row g-3 mt-4">
+            <div class="col-auto">
+                <div class="textBox">
+                    경력사항을 자유롭게 기술해 주세요. (발매한앨범, 수상경력 등)
+                </div>
+                <div>
+                    <textarea class="textBox"></textarea>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div style="margin-bottom: 40px;">
+            <button type="submit" class="btn btn-outline-primary" id="submitBtn">가입하기</button>
+            <!--        <input type="submit" class="btn btn-outline-primary" id="submitBtn" value="가입하기">-->
+        </div>
+
+
+        <script th:inline="javascript">
+
+        var result_pw;
+        const submitButton = document.getElementById('submitBtn');
+        submitButton.disabled = true;
+
+        <!--    비밀번호 일치여부-->
+        function pwCheck() {
+                    const pw = document.getElementById("password").value;
+                    const pwCheck = document.getElementById("password_check").value;
+
+                    if(pw==pwCheck) {
+                        pwCheckResult.style.color = "green";
+                        pwCheckResult.innerHTML = "비밀번호가 일치합니다.";
+
+                        result_pw = "ok";
+
+                        if(result_pw === "ok"){
+                            submitButton.disabled = false;
+                            }
+
+                    }else {
+                        pwCheckResult.style.color = "red";
+                        pwCheckResult.innerHTML = "비밀번호가 일치하지 않습니다.";
+                        result_pw = "fail";
+
+                        if(result_pw === "fail"){
+                            submitButton.disabled = true;
+                            }
+                    }
+
+                }
+</script>
+    </form>
+</div>
+</body>
+
+<!-- Footer -->
+<footer id="footer">
+    <div>
+        <th:block th:include="footer"></th:block>
+    </div>
+</footer>
+</html>

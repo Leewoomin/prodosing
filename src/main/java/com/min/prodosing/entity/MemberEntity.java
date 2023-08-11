@@ -2,6 +2,8 @@ package com.min.prodosing.entity;
 
 import com.min.prodosing.dto.MemberDTO;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -12,6 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@DynamicInsert
 @Table(name = "member")
 public class MemberEntity extends BaseEntity{
 
@@ -29,6 +32,7 @@ public class MemberEntity extends BaseEntity{
     private String phone;
     private String birth;
     private String email;
+    @ColumnDefault("F")
     private String career;
     private String favorite;
     private String satus;

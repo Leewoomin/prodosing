@@ -34,18 +34,18 @@ public class MemberService {
 
     }
 
-    public boolean login(MemberDTO memberDTO) {
+    public String login(MemberDTO memberDTO) {
         Optional<MemberEntity> byUserid = memberRepository.findByUserid(memberDTO.getUserid());
-        MemberEntity memberEntity = byUserid.get();
 
         if(byUserid.isPresent()) {
+            MemberEntity memberEntity = byUserid.get();
             if(memberDTO.getPassword().equals(memberEntity.getPassword())) {
-                return true;
+                return memberEntity.getSatus();
             }else {
-                return false;
+                return null;
             }
         }else {
-            return false;
+            return null;
         }
     }
 }
