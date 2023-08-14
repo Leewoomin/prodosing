@@ -39,6 +39,7 @@
 <!--아이디 사용하기 버튼-->
         function idResult() {
             opener.document.getElementById("userid").value = document.getElementById("userid").value;
+            console.log(opener.pwCheck());
             window.close();
         }
 

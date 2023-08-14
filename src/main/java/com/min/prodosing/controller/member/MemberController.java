@@ -1,4 +1,4 @@
-package com.min.prodosing.controller;
+package com.min.prodosing.controller.member;
 
 import com.min.prodosing.dto.MemberDTO;
 import com.min.prodosing.service.MemberService;

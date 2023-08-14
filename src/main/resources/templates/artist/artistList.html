@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>아티스트 목록</title>
+    <!--BootStap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="css/artistList.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="css/artistList.css" />
+    <!--Jquery-->
+    <!--    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>-->
+    <script
+            src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+            crossorigin="anonymous">
+    </script>
+</head>
+<body>
+<div>
+    <th:block th:include="header"></th:block>
+</div>
+<form name="artistSearch" action="/artistSearch" method="post" onsubmit="return submitForm()">
+    <div class="search">
+        <input type="text" name="artistName" id="artistSearch" placeholder="아티스트 검색">
+        <input type="image" id="searchimg" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+    </div>
+</form>
+
+<script th:inline="javascript">
+
+</script>
+
+<table>
+    <thead>
+    <tr>
+        <th>프로필사진</th>
+        <th>팀명</th>
+        <th>공연예정일</th>
+        <th>Fan</th>
+        <th>구독하기</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><img src="https://i.postimg.cc/yYYd1HV1/katara.jpg" alt="img"></td>
+        <td>Ninja</td>
+        <td>Asma Ad</td>
+        <td>120</td>
+        <td>
+            <button class="view">view</button>
+            <button class="delete">Delete</button>
+        </td>
+    </tr>
+
+    <tr>
+        <td><img src="https://i.postimg.cc/Y26YPMSb/zuko.jpg" alt="img"></td>
+        <td>Shades</td>
+        <td>David</td>
+        <td>180</td>
+        <td>
+            <button class="view">view</button>
+            <button class="delete">Delete</button>
+        </td>
+    </tr>
+
+    <tr>
+        <td><img src="https://i.postimg.cc/yYYd1HV1/katara.jpg" alt="img"></td>
+        <td>Alex</td>
+        <td>.</td>
+        <td>160</td>
+        <td>
+            <button class="view">view</button>
+            <button class="delete">Delete</button>
+        </td>
+    </tr>
+
+    <tr>
+        <td><img src="https://i.postimg.cc/Y26YPMSb/zuko.jpg" alt="img"></td>
+        <td>Valhala</td>
+        <td> Kawtar</td>
+        <td>190</td>
+        <td>
+            <button class="view">view</button>
+            <button class="delete">Delete</button>
+        </td>
+    </tr>
+
+    <tr>
+        <td><img src="https://i.postimg.cc/yYYd1HV1/katara.jpg" alt="img"></td>
+        <td>Katara</td>
+        <td>.</td>
+        <td>110</td>
+        <td>
+            <button class="view">view</button>
+            <button class="delete">Delete</button>
+        </td>
+    </tr>
+
+    <tr>
+        <td><img src="https://i.postimg.cc/Y26YPMSb/zuko.jpg" alt="img"></td>
+        <td>Union</td>
+        <td>Ashraf</td>
+        <td>90</td>
+        <td>
+            <button class="view">view</button>
+            <button class="delete">Delete</button>
+        </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <td colspan="5" class="tablefoot"></td>
+    </tfoot>
+</table>
+<div style="text-align: center; margin-bottom:80px;">페이징 자리</div>
+</body>
+<!--footer-->
+<footer>
+    <div id="footer">
+        <th:block th:include="footer"></th:block>
+    </div>
+</footer>
+</html>

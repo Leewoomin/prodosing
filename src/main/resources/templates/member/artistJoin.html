@@ -108,18 +108,21 @@
 </script>
 
         <div class="row g-3 mt-4">
+            <div class="col-auto">
+                <div class="textBox">생년월일</div>
+            </div>
             <div class="ml-3 ">
-                <select name="birth_y" id="year"  class="form-control">
+                <select name="birth_y" id="year"  class="textBox">
                     <option selected disabled hidden>년</option>
                 </select>
             </div>
             <div class="ml-3 ">
-                <select name="birth_m" id="month"  class="form-control">
+                <select name="birth_m" id="month"  class="textBox">
                     <option selected disabled hidden>월</option>
                 </select>
             </div>
             <div class="ml-3">
-                <select name="birth_d" id="day"  class="form-control">
+                <select name="birth_d" id="day"  class="textBox">
                     <option selected disabled hidden>일</option>
                 </select>
             </div>
@@ -133,7 +136,7 @@
                 @
             </div>
             <div class="ml-3">
-                <select name="email_site"  class="form-control selectpicker noborder ">
+                <select name="email_site"  class="textBox">
                     <option value="직접입력">직접입력</option>
                     <option value="naver.com">naver.com</option>
                     <option value="daum.net">daum.net</option>
@@ -164,27 +167,28 @@
 
 
         <script th:inline="javascript">
-
-        var result_pw;
+var result_pw;
         const submitButton = document.getElementById('submitBtn');
         submitButton.disabled = true;
 
         <!--    비밀번호 일치여부-->
         function pwCheck() {
+                    const result_id = document.getElementById("userid").value;
                     const pw = document.getElementById("password").value;
                     const pwCheck = document.getElementById("password_check").value;
 
-                    if(pw==pwCheck) {
+                    if(pw!="" && pw==pwCheck) {
                         pwCheckResult.style.color = "green";
                         pwCheckResult.innerHTML = "비밀번호가 일치합니다.";
 
                         result_pw = "ok";
+                        if(result_id != "") {
+                            if(result_pw === "ok"){
+                                submitButton.disabled = false;
+                                }
+                        }
 
-                        if(result_pw === "ok"){
-                            submitButton.disabled = false;
-                            }
-
-                    }else {
+                    }else if(pw!="" && pw!=pwCheck){
                         pwCheckResult.style.color = "red";
                         pwCheckResult.innerHTML = "비밀번호가 일치하지 않습니다.";
                         result_pw = "fail";
@@ -194,7 +198,8 @@
                             }
                     }
 
-                }
+
+            }
 </script>
     </form>
 </div>
