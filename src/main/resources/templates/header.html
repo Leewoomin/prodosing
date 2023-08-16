@@ -13,9 +13,9 @@
     <div id="center">
         <ul class="menu align-center expanded text-center SMN_effect-34">
             <li><a href="artistList"><span>아티스트 목록</span></a></li>
-            <li><a href="#"><span>공연일정</span></a></li>
-            <li><a href="#"><span>자유게시판</span></a></li>
-            <li><a href="#"><span>공연등록</span></a></li>
+            <li><a href="schedule"><span>공연일정</span></a></li>
+            <li><a href="board"><span>자유게시판</span></a></li>
+            <li th:if="${session.status=='A'}"><a th:href="@{/register(userid=${session.loginId}, team_name=${session.teamname})}"><span>공연등록</span></a></li>
         </ul>
     </div>
 

@@ -13,7 +13,6 @@ public class MemberDTO {
     private Long member_id;
     private String userid;
     private String password;
-    private String password_check;
     private String name;
     private String team_name;
     private String gender;
@@ -26,7 +25,9 @@ public class MemberDTO {
     private String email_site;
     private String career;
     private String favorite;
-    private String satus;
+    private String filename;
+    private String filepath;
+    private String status;
 
 
     public static MemberDTO toMemberDTO(MemberEntity memberEntity) {
@@ -34,7 +35,6 @@ public class MemberDTO {
                 .member_id(memberEntity.getMember_id())
                 .userid(memberEntity.getUserid())
                 .password(memberEntity.getPassword())
-                .password_check(memberEntity.getPassword_check())
                 .name(memberEntity.getName())
                 .team_name(memberEntity.getTeam_name())
                 .gender(memberEntity.getGender())
@@ -43,7 +43,9 @@ public class MemberDTO {
                 .email(memberEntity.getEmail())
                 .career(memberEntity.getCareer())
                 .favorite(memberEntity.getFavorite())
-                .satus(memberEntity.getSatus())
+                .filename(memberEntity.getFilename())
+                .filepath(memberEntity.getFilepath())
+                .status(memberEntity.getStatus())
                 .build();
     }
 }

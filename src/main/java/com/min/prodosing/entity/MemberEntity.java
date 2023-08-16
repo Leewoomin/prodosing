@@ -25,7 +25,6 @@ public class MemberEntity extends BaseEntity{
     @Column(unique = true)
     private String userid;
     private String password;
-    private String password_check;
     private String name;
     private String team_name;
     private String gender;
@@ -35,7 +34,9 @@ public class MemberEntity extends BaseEntity{
     @ColumnDefault("F")
     private String career;
     private String favorite;
-    private String satus;
+    private String filename;
+    private String filepath;
+    private String status;
 
 
 
@@ -45,7 +46,6 @@ public class MemberEntity extends BaseEntity{
                 .member_id(memberDTO.getMember_id())
                 .userid(memberDTO.getUserid())
                 .password(memberDTO.getPassword())
-                .password_check(memberDTO.getPassword_check())
                 .name(memberDTO.getName())
                 .team_name(memberDTO.getTeam_name())
                 .gender(memberDTO.getGender())
@@ -54,7 +54,9 @@ public class MemberEntity extends BaseEntity{
                 .email(memberDTO.getEmail())
                 .career(memberDTO.getCareer())
                 .favorite(memberDTO.getFavorite())
-                .satus(memberDTO.getSatus())
+                .filename(memberDTO.getFilename())
+                .filepath(memberDTO.getFilepath())
+                .status(memberDTO.getStatus())
                 .build();
     }
 

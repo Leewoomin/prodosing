@@ -1,4 +1,4 @@
-package com.min.prodosing.controller.member;
+package com.min.prodosing.controller;
 
 import com.min.prodosing.dto.MemberDTO;
 import com.min.prodosing.service.MemberService;
@@ -110,7 +110,7 @@ public class MemberController {
     //로그인
     @PostMapping("login")
     public String login(MemberDTO memberDTO, HttpSession session, Model model) {
-        System.out.println("status= "+memberDTO.getSatus());
+        System.out.println("status= "+memberDTO.getStatus());
         String loginResult = memberService.login(memberDTO);
 
         if(loginResult != null) {
@@ -178,7 +178,7 @@ public class MemberController {
         }
 
         //status "A"(artist)
-        memberDTO.setSatus("A");
+        memberDTO.setStatus("A");
 
         String result = memberService.join(memberDTO);
 

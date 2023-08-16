@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>공연등록</title>
+  <!--BootStap-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="css/artistList.css" />
+  <link rel="stylesheet" href="css/join.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/artistList.css" />
+  <!--Jquery-->
+  <script
+          src="https://code.jquery.com/jquery-3.7.0.min.js">
+  </script>
+</head>
+<body>
+<div>
+  <th:block th:include="header"></th:block>
+</div>
+<div id="body">
+  <div style="margin-top: 50px;"><h1><b>공 연 등 록</b></h1></div>
+  <div style="margin-top: 150px; float: left; width: 900px; display: block;"><h5 style="text-align: left;"><b>공연정보입력</b></h5>
+    <hr style="margin-top: 0px;"></div>
+  <div style="clear:both;"></div>
+
+  <form name="register" action="/register" method="post">
+    <div class="row g-3 mt-5">
+      <div class="col-auto">
+        <input name="team_name" type="text" th:value="${session.teamname}" class="textBox" readonly>
+      </div>
+
+    </div>
+    <div class="row g-3 mt-1 ml-2" id="check-result"></div>
+    <p id="useridOutput"></p>
+
+    <div class="row g-3 mt-4">
+      <div class="col-auto">
+        <input name="place" type="text" placeholder="장소" class="textBox">
+      </div>
+    </div>
+
+    <div class="row g-3 mt-4">
+      <div class="col-auto">
+        <select name="starttime" id="starttime" class="textBox">
+          <option selected disabled hidden>시작시간</option>
+        </select>
+      </div>
+      <div class="col-auto">
+        <select name="endtime" id="endtime" class="textBox">
+          <option selected disabled hidden>종료시간</option>
+        </select>
+      </div>
+    </div>
+
+
+
+    <div class="row g-3 mt-4">
+      <div class="col-auto">
+        <input name="stage_size" type="number" placeholder="공연장 최대인원" step="10" class="textBox"> 명
+      </div>
+    </div>
+
+    <div class="row g-3 mt-4">
+      <div class="col-auto">
+        <input type="text" name="price" id="price" placeholder="티켓가격(미입력시 무료)" class="textBox"> 원
+      </div>
+    </div>
+
+    <div class="row g-3 mt-4">
+      <div class="col-auto">
+        <div class="textBox">
+          공연에대한 설명을 팬들이 볼수있도록 자유롭게 작성해주세요.
+        </div>
+        <div>
+          <textarea class="textBox"></textarea>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div style="margin-bottom: 40px;">
+      <button type="submit" class="btn btn-outline-primary" id="submitBtn">등록하기</button>
+      <!--        <input type="submit" class="btn btn-outline-primary" id="submitBtn" value="가입하기">-->
+    </div>
+
+
+  </form>
+</div>
+<!-- 시작시간, 종료시간 selectbox -->
+<script th:inline="javascript">
+    const starttime = document.getElementById('starttime');
+    const endtime = document.getElementById('endtime');
+
+    for (let hour = 0; hour < 24; hour++) {
+    for (let minute = 0; minute < 60; minute += 30) {
+    const option = document.createElement('option');
+    const formattedHour = hour.toString().padStart(2, '0');
+    const formattedMinute = minute.toString().padStart(2, '0');
+    option.value = `${formattedHour}:${formattedMinute}`;
+    option.textContent = `${formattedHour}:${formattedMinute}`;
+    starttime.appendChild(option);
+}
+}
+
+    for (let hour = 0; hour < 24; hour++) {
+    for (let minute = 0; minute < 60; minute += 30) {
+    const option = document.createElement('option');
+    const formattedHour = hour.toString().padStart(2, '0');
+    const formattedMinute = minute.toString().padStart(2, '0');
+    option.value = `${formattedHour}:${formattedMinute}`;
+    option.textContent = `${formattedHour}:${formattedMinute}`;
+    endtime.appendChild(option);
+    }
+
+const input = document.querySelector('#price');
+input.addEventListener('keyup', function(e) {
+    let value = e.target.value;
+    value = Number(value.replaceAll(',', ''));
+    if(isNaN(value)) {
+
+    }else {
+        const formatValue = value.toLocaleString('ko-KR');
+        input.value = formatValue;
+    }
+})
+
+}
+</script>
+</body>
+</body>
+<footer>
+  <div id="footer">
+    <th:block th:include="footer"></th:block>
+  </div>
+</footer>
+</html>

@@ -40,7 +40,7 @@ public class MemberService {
         if(byUserid.isPresent()) {
             MemberEntity memberEntity = byUserid.get();
             if(memberDTO.getPassword().equals(memberEntity.getPassword())) {
-                return memberEntity.getSatus();
+                return memberEntity.getStatus();
             }else {
                 return null;
             }
