@@ -2,6 +2,9 @@ package com.min.prodosing.dto;
 
 import com.min.prodosing.entity.ConcertEntity;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+
+import java.sql.Date;
 
 @Getter
 @Setter
@@ -10,28 +13,26 @@ import lombok.*;
 @ToString
 @Builder
 public class ConcertDTO {
-    private Long SCH_ID;
-    private String TEAM_NAME;
-    private String DATE;
-    private String PLACE;
-    private String START_TIME;
-    private String END_TIME;
-    private String STAGE_SIZE;
-    private int PRICE;
-    private String NOTE;
+    private Long sch_id;
+    private String team_name;
+    private Date date;
+    private String place;
+    private String start_time;
+    private String stage_size;
+    private String price;
+    private String note;
 
 
-    private static ConcertDTO concertDTO(ConcertEntity concertEntity) {
+    private static ConcertDTO toConcertDTO(ConcertEntity concertEntity) {
         return ConcertDTO.builder()
-                .SCH_ID(concertEntity.getSCH_ID())
-                .TEAM_NAME(concertEntity.getTEAM_NAME())
-                .DATE(concertEntity.getDATE())
-                .PLACE(concertEntity.getPLACE())
-                .START_TIME(concertEntity.getSTART_TIME())
-                .END_TIME(concertEntity.getEND_TIME())
-                .STAGE_SIZE(concertEntity.getSTAGE_SIZE())
-                .PRICE(concertEntity.getPRICE())
-                .NOTE(concertEntity.getNOTE())
+                .sch_id(concertEntity.getSch_id())
+                .team_name(concertEntity.getTeam_name())
+                .date(concertEntity.getDate())
+                .place(concertEntity.getPlace())
+                .start_time(concertEntity.getStart_time())
+                .stage_size(concertEntity.getStage_size())
+                .price(concertEntity.getPrice())
+                .note(concertEntity.getNote())
                 .build();
     }
 }

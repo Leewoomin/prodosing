@@ -14,6 +14,7 @@ import java.util.Optional;
 public class MemberService {
     private final MemberRepository memberRepository;
 
+    //회원가입
     public String join(MemberDTO memberDTO) {
         try {
             memberRepository.save(MemberEntity.toMemberEntity(memberDTO));
@@ -24,6 +25,7 @@ public class MemberService {
         }
     }
 
+    //아이디 중복확인
     public String idCheck(String userid) {
         Optional<MemberEntity> byUserId = memberRepository.findByUserid(userid);
         if(byUserId.isPresent()) {
@@ -34,6 +36,7 @@ public class MemberService {
 
     }
 
+    //로그인
     public String login(MemberDTO memberDTO) {
         Optional<MemberEntity> byUserid = memberRepository.findByUserid(memberDTO.getUserid());
 

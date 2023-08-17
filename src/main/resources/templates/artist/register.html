@@ -25,10 +25,10 @@
     <hr style="margin-top: 0px;"></div>
   <div style="clear:both;"></div>
 
-  <form name="register" action="/register" method="post">
+  <form name="register" action="/register" id="frm" method="post">
     <div class="row g-3 mt-5">
       <div class="col-auto">
-        <input name="team_name" type="text" th:value="${session.teamname}" class="textBox" readonly>
+        <input name="team_name" type="text" th:value="${teamname}" class="textBox" readonly>
       </div>
 
     </div>
@@ -37,34 +37,37 @@
 
     <div class="row g-3 mt-4">
       <div class="col-auto">
-        <input name="place" type="text" placeholder="장소" class="textBox">
+        <input name="place" id="place" type="text" placeholder="장소" class="textBox">
+      </div>
+    </div>
+<script th:inline="javascript">
+
+</script>
+    <div class="row g-3 mt-4">
+      <div class="col-auto">
+        <input name="date" id="date" type="date" placeholder="날짜" class="textBox">
       </div>
     </div>
 
     <div class="row g-3 mt-4">
       <div class="col-auto">
-        <select name="starttime" id="starttime" class="textBox">
+        <select name="start_time" id="time" class="textBox">
           <option selected disabled hidden>시작시간</option>
         </select>
       </div>
-      <div class="col-auto">
-        <select name="endtime" id="endtime" class="textBox">
-          <option selected disabled hidden>종료시간</option>
-        </select>
-      </div>
     </div>
 
 
 
     <div class="row g-3 mt-4">
       <div class="col-auto">
-        <input name="stage_size" type="number" placeholder="공연장 최대인원" step="10" class="textBox"> 명
+        <input name="stage_size" type="number" placeholder="공연장 최대인원" step="1" class="textBox"> 명
       </div>
     </div>
 
     <div class="row g-3 mt-4">
       <div class="col-auto">
-        <input type="text" name="price" id="price" placeholder="티켓가격(미입력시 무료)" class="textBox"> 원
+        <input type="text" name="price" id="price" placeholder="티켓가격(미입력시 무료)" class="textBox" oninput="numberOnly(this)"> 원
       </div>
     </div>
 
@@ -82,7 +85,8 @@
 
 
     <div style="margin-bottom: 40px;">
-      <button type="submit" class="btn btn-outline-primary" id="submitBtn">등록하기</button>
+      <button type="button" class="btn btn-outline-primary" onclick="check()">등록하기</button>
+
       <!--        <input type="submit" class="btn btn-outline-primary" id="submitBtn" value="가입하기">-->
     </div>
 
@@ -91,43 +95,59 @@
 </div>
 <!-- 시작시간, 종료시간 selectbox -->
 <script th:inline="javascript">
-    const starttime = document.getElementById('starttime');
-    const endtime = document.getElementById('endtime');
+    const starttime = document.getElementById('time');
 
     for (let hour = 0; hour < 24; hour++) {
-    for (let minute = 0; minute < 60; minute += 30) {
-    const option = document.createElement('option');
-    const formattedHour = hour.toString().padStart(2, '0');
-    const formattedMinute = minute.toString().padStart(2, '0');
-    option.value = `${formattedHour}:${formattedMinute}`;
-    option.textContent = `${formattedHour}:${formattedMinute}`;
-    starttime.appendChild(option);
-}
-}
-
-    for (let hour = 0; hour < 24; hour++) {
-    for (let minute = 0; minute < 60; minute += 30) {
-    const option = document.createElement('option');
-    const formattedHour = hour.toString().padStart(2, '0');
-    const formattedMinute = minute.toString().padStart(2, '0');
-    option.value = `${formattedHour}:${formattedMinute}`;
-    option.textContent = `${formattedHour}:${formattedMinute}`;
-    endtime.appendChild(option);
+        for (let minute = 0; minute < 60; minute += 30) {
+        const option = document.createElement('option');
+        const formattedHour = hour.toString().padStart(2, '0');
+        const formattedMinute = minute.toString().padStart(2, '0');
+        option.value = `${formattedHour}:${formattedMinute}`;
+        option.textContent = `${formattedHour}:${formattedMinute}`;
+        starttime.appendChild(option);
+      }
     }
 
-const input = document.querySelector('#price');
-input.addEventListener('keyup', function(e) {
-    let value = e.target.value;
-    value = Number(value.replaceAll(',', ''));
-    if(isNaN(value)) {
+    const input = document.querySelector('#price');
+    input.addEventListener('keyup', function(e) {
+        let value = e.target.value;
+        value = Number(value.replaceAll(',', ''));
+        if(isNaN(value)) {
 
-    }else {
-        const formatValue = value.toLocaleString('ko-KR');
-        input.value = formatValue;
-    }
-})
+        }else {
+            const formatValue = value.toLocaleString('ko-KR');
+            input.value = formatValue;
+        }
+      })
 
-}
+      //공연 날짜 최솟값 설정
+      var todayDate = new Date().toISOString().slice(0,10);
+      document.getElementById('date').setAttribute("min", todayDate);
+
+      //티켓가격 숫자만 입력
+      function numberOnly(el) {
+        el.value = el.value.replace(/[^0-9]/g, '');
+      }
+
+
+      function check(){
+        var place = document.getElementById('place').value;
+        var date = document.getElementById('date').value;
+        var stime = document.getElementById('time').value;
+        var price = document.getElementById('price').value;
+        if(!place) {
+          alert('공연장소를 입력해 주세요.');
+        }else if(!date) {
+          alert('공연날짜를 입력해 주세요.');
+        }else if(stime == '시작시간') {
+          alert('공연시작시간을 입력해 주세요.');
+        }else if(!price) {
+          alert('티켓가격을 입력해 주세요.');
+        }else {
+          document.getElementById('frm').submit();
+        }
+      }
+
 </script>
 </body>
 </body>

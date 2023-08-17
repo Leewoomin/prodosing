@@ -10,6 +10,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 @Getter
@@ -18,33 +19,31 @@ import javax.persistence.*;
 @AllArgsConstructor
 @DynamicInsert
 @Table(name = "concert")
-public class ConcertEntity {
+public class ConcertEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //auto_increment
-    private Long SCH_ID;
-    private String TEAM_NAME;
-    private String DATE;
-    private String PLACE;
-    private String START_TIME;
-    private String END_TIME;
-    private String STAGE_SIZE;
+    private Long sch_id;
+    private String team_name;
+    private Date date;
+    private String place;
+    private String start_time;
+    private String stage_size;
     @ColumnDefault("0")
-    private int PRICE;
-    private String NOTE;
+    private String price;
+    private String note;
 
 
 
     public static ConcertEntity toConcertEntity(ConcertDTO concertDTO) {
         return ConcertEntity.builder()
-                .SCH_ID(concertDTO.getSCH_ID())
-                .TEAM_NAME(concertDTO.getTEAM_NAME())
-                .DATE(concertDTO.getDATE())
-                .PLACE(concertDTO.getPLACE())
-                .START_TIME(concertDTO.getSTART_TIME())
-                .END_TIME(concertDTO.getEND_TIME())
-                .STAGE_SIZE(concertDTO.getSTAGE_SIZE())
-                .PRICE(concertDTO.getPRICE())
-                .NOTE(concertDTO.getNOTE())
+                .sch_id(concertDTO.getSch_id())
+                .team_name(concertDTO.getTeam_name())
+                .date(concertDTO.getDate())
+                .place(concertDTO.getPlace())
+                .start_time(concertDTO.getStart_time())
+                .stage_size(concertDTO.getStage_size())
+                .price(concertDTO.getPrice())
+                .note(concertDTO.getNote())
                 .build();
     }
 
