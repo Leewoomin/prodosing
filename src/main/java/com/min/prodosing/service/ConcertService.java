@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -37,5 +39,20 @@ public class ConcertService {
             return false;
         }
 
+    }
+
+    public List<ConcertDTO> concertList() {
+        List<ConcertEntity> concertEntityList = concertRepository.findAll();
+        List<ConcertDTO> concertDTOList = new ArrayList<>();
+
+        for(ConcertEntity concertEntity: concertEntityList) {
+            concertDTOList.add(ConcertDTO.toConcertDTO(concertEntity));
+        }
+        return concertDTOList;
+    }
+
+    public ConcertDTO concertInfo(Long concertId) {
+        Optional<ConcertEntity> concertEntity = concertRepository.findById(concertId);
+        return ConcertDTO.toConcertDTO(concertEntity.get());
     }
 }

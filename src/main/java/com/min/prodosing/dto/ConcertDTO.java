@@ -13,7 +13,7 @@ import java.sql.Date;
 @ToString
 @Builder
 public class ConcertDTO {
-    private Long sch_id;
+    private Long concert_id;
     private String team_name;
     private Date date;
     private String place;
@@ -21,11 +21,13 @@ public class ConcertDTO {
     private String stage_size;
     private String price;
     private String note;
+    private String filename;
+    private String filepath;
 
 
-    private static ConcertDTO toConcertDTO(ConcertEntity concertEntity) {
+    public static ConcertDTO toConcertDTO(ConcertEntity concertEntity) {
         return ConcertDTO.builder()
-                .sch_id(concertEntity.getSch_id())
+                .concert_id(concertEntity.getConcert_id())
                 .team_name(concertEntity.getTeam_name())
                 .date(concertEntity.getDate())
                 .place(concertEntity.getPlace())
@@ -33,6 +35,8 @@ public class ConcertDTO {
                 .stage_size(concertEntity.getStage_size())
                 .price(concertEntity.getPrice())
                 .note(concertEntity.getNote())
+                .filename(concertEntity.getFilename())
+                .filepath(concertEntity.getFilepath())
                 .build();
     }
 }

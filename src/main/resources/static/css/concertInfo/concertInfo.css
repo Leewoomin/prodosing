@@ -1,0 +1,22 @@
+
+body {
+    margin: 0;
+}
+
+
+.sv_top{background: #f7f7f7;border:1px solid #000;padding: 60px 70px;margin-bottom: 30px;}
+.sv_top .in{position: relative; display: flex; flex-wrap: wrap;}
+.sv_top .poster{width: 340px;box-shadow: 3px 7px 21px rgba(0,0,0,.13); background: #556080; height: 100%;}
+.sv_top .poster img{width: 100%;display: block;}
+.sv_top .poster_wrap{width: 30%;}
+.sv_top .poster_new{box-shadow: 3px 7px 21px rgba(0,0,0,.13); background: #556080}
+.sv_top .poster_new img{width: 100%;display: block;}
+.sv_top .txt{min-height:350px; flex:1; margin-left: 50px}
+.sv_top .tit{position: relative;padding-right: 187px;}
+.sv_top .tit .t{font-size: 30px;;font-size: 1.875rem;display: block;margin-bottom: 1em;letter-spacing: -0.05em;line-height: 1.35;}
+.sv_top .detail{font-size: 0.938em;}
+.sv_top .detail > li{position: relative;border-bottom: 1px solid #ddd;;padding: 0.8em 0 0.8em 3.533em}
+.sv_top .detail .dt{position: absolute;left: 0;top:0.8em}
+.sv_top .sns{position: absolute;right: 0;top:0;text-align: right;}
+.sv_top .sns button{margin-left: 3px;}
+.sv_top .sns button img{display: block;}

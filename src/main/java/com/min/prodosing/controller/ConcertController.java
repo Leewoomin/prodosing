@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -45,11 +46,23 @@ public class ConcertController {
 
     }
 
-
-
     //공연목록
     @GetMapping("schedule")
-    public String schedule() {
-        return "artist/schedule";
+    public String schedule(Model model) {
+        List<ConcertDTO> concertDTOList = concertService.concertList();
+
+        String nlString = System.getProperty("line.separator").toString();
+        model.addAttribute("concertList", concertDTOList);
+        model.addAttribute("nlString", nlString);
+
+        return "artist/concertList";
+    }
+
+    //공연상세정보
+    @GetMapping("concertInfo")
+    public String concertInfo(Long concert_id, Model model) {
+        ConcertDTO concertDTO = concertService.concertInfo(concert_id);
+        model.addAttribute("concert", concertDTO);
+        return "artist/concertInfo";
     }
 }

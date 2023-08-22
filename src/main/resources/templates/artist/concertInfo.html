@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/concertInfo/concertInfo.css">
+    <title>공연상세정보</title>
+</head>
+<header>
+    <th:block th:include="header"></th:block>
+</header>
+<body>
+<div class="sv_top">
+    <div class="in">
+        <div class="poster">
+            <!-- 포스터 테스트 -->
+            <!-- <img src="/static/portal/img/thumb/poster_temp.jpg" alt="" /> -->
+
+            <img src="images/sample.jpg" alt="">
+
+        </div>
+        <div class="txt">
+            <div class="tit">
+                <h2 class="t">
+                    연극 &lt; 2시 22분 - A GHOST STORY &gt;
+                </h2>
+
+            </div>
+            <ul class="detail">
+                <li><span class="dt">날짜</span><span th:text="${concert.date}"></span></li>
+                <li><span class="dt">장소</span>  세종M씨어터</li>
+                <li><span class="dt">시간</span> 화-금 7시30분 / 토-일 2시, 6시30분 / 월 공연 없음  * 8/15(화) 2시22분 공연&nbsp;(공연시간 : 130  분 / 인터미션 : 15 분)
+
+                </li>
+                <li><span class="dt">연령</span> 14세 이상 관람가 (2010년생까지 관람가능)&nbsp;</li>
+                <li><span class="dt">티켓</span> VIP석 90,000원 / R석 70,000원 / S석 50,000원 / R 시야제한석 60,000원&nbsp;</li>
+
+                <li><span class="dt">문의</span> 티켓 예매 문의 전화 : 세종문화티켓 02-399-1000  / 기획사 문의 전화 : 신시컴퍼니 02- 577-1987</li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<!-- Footer -->
+<footer id="footer">
+    <div>
+        <th:block th:include="footer"></th:block>
+    </div>
+</footer>
+</html>

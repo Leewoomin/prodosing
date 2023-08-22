@@ -22,7 +22,7 @@ import java.sql.Date;
 public class ConcertEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //auto_increment
-    private Long sch_id;
+    private Long concert_id;
     private String team_name;
     private Date date;
     private String place;
@@ -31,12 +31,14 @@ public class ConcertEntity extends BaseEntity {
     @ColumnDefault("0")
     private String price;
     private String note;
+    private String filename;
+    private String filepath;
 
 
 
     public static ConcertEntity toConcertEntity(ConcertDTO concertDTO) {
         return ConcertEntity.builder()
-                .sch_id(concertDTO.getSch_id())
+                .concert_id(concertDTO.getConcert_id())
                 .team_name(concertDTO.getTeam_name())
                 .date(concertDTO.getDate())
                 .place(concertDTO.getPlace())
@@ -44,6 +46,8 @@ public class ConcertEntity extends BaseEntity {
                 .stage_size(concertDTO.getStage_size())
                 .price(concertDTO.getPrice())
                 .note(concertDTO.getNote())
+                .filename(concertDTO.getFilename())
+                .filepath(concertDTO.getFilepath())
                 .build();
     }
 
