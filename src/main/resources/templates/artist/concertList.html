@@ -39,7 +39,8 @@
             </div>
             <div class="blog-body">
                 <div class="box-content">
-                    <h3 class="post-title" th:text="${concert.team_name}"></h3>
+                    <h3 class="post-title" th:text="${concert.title}"></h3>
+                    <div th:text="${concert.team_name}"></div>
                     <span id="dateText" class="blog-meta" th:text="|${concert.date}  /  ${concert.start_time}|"></span>
                     <p th:utext="${#strings.replace(concert.note, nlString, '&lt;br /&gt;')}"></p>
 <!--                    <p th:text="${concert.note}"></p>-->

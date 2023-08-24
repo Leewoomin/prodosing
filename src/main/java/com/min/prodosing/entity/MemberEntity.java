@@ -7,6 +7,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 @Entity
@@ -20,13 +21,14 @@ public class MemberEntity extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //auto_increment
-    private Long member_id;
+    private Long memberid;
 
     @Column(unique = true)
     private String userid;
     private String password;
     private String name;
-    private String team_name;
+    @Column(name = "team_name")
+    private String teamname;
     private String gender;
     private String phone;
     private String birth;
@@ -39,15 +41,13 @@ public class MemberEntity extends BaseEntity{
     private String status;
 
 
-
-
     public static MemberEntity toMemberEntity(MemberDTO memberDTO) {
         return MemberEntity.builder()
-                .member_id(memberDTO.getMember_id())
+                .memberid(memberDTO.getMemberid())
                 .userid(memberDTO.getUserid())
                 .password(memberDTO.getPassword())
                 .name(memberDTO.getName())
-                .team_name(memberDTO.getTeam_name())
+                .teamname(memberDTO.getTeam_name())
                 .gender(memberDTO.getGender())
                 .phone(memberDTO.getPhone())
                 .birth(memberDTO.getBirth())
@@ -59,12 +59,5 @@ public class MemberEntity extends BaseEntity{
                 .status(memberDTO.getStatus())
                 .build();
     }
-
-//    public static MemberEntity toMemberEntity(MemberDTO memberDTO) {
-//        MemberEntity memberEntity = new MemberEntity();
-//        memberEntity.setMember_id(memberDTO.getMember_id());
-//        memberEntity.setPassword(memberDTO.getPassword());
-//        return memberEntity;
-//    }
 
 }

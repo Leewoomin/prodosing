@@ -29,7 +29,7 @@ table img {
 }
 
 .view,
-.delete {
+.fan {
     border: none;
     padding: 5px 10px;
     color: #fff;
@@ -40,7 +40,7 @@ table img {
     background-color: #03A9F4;
 }
 
-.delete {
+.fan {
     background-color: #E91E63;
 }
 
@@ -70,4 +70,14 @@ table img {
      top: 11px;
      right: 18px;
      margin: auto;
+   }
+
+   #paging {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 18px;
+   }
+
+   #paging a, strong{
+    padding: 0px 5px 0px 5px;
    }

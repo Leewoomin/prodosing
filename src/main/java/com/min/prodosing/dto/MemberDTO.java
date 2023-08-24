@@ -1,7 +1,12 @@
 package com.min.prodosing.dto;
 
+import com.min.prodosing.entity.ConcertEntity;
 import com.min.prodosing.entity.MemberEntity;
 import lombok.*;
+
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import java.sql.Date;
 
 @Getter
 @Setter
@@ -10,7 +15,7 @@ import lombok.*;
 @ToString
 @Builder
 public class MemberDTO {
-    private Long member_id;
+    private Long memberid;
     private String userid;
     private String password;
     private String name;
@@ -30,13 +35,17 @@ public class MemberDTO {
     private String status;
 
 
+    public MemberDTO(String team_name){
+        this.team_name = team_name;
+    }
+
     public static MemberDTO toMemberDTO(MemberEntity memberEntity) {
         return MemberDTO.builder()
-                .member_id(memberEntity.getMember_id())
+                .memberid(memberEntity.getMemberid())
                 .userid(memberEntity.getUserid())
                 .password(memberEntity.getPassword())
                 .name(memberEntity.getName())
-                .team_name(memberEntity.getTeam_name())
+                .team_name(memberEntity.getTeamname())
                 .gender(memberEntity.getGender())
                 .phone(memberEntity.getPhone())
                 .birth(memberEntity.getBirth())
@@ -48,4 +57,5 @@ public class MemberDTO {
                 .status(memberEntity.getStatus())
                 .build();
     }
+
 }

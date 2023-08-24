@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -23,7 +24,9 @@ public class ConcertEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //auto_increment
     private Long concert_id;
+    private String title;
     private String team_name;
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date date;
     private String place;
     private String start_time;
@@ -35,10 +38,10 @@ public class ConcertEntity extends BaseEntity {
     private String filepath;
 
 
-
     public static ConcertEntity toConcertEntity(ConcertDTO concertDTO) {
         return ConcertEntity.builder()
                 .concert_id(concertDTO.getConcert_id())
+                .title(concertDTO.getTitle())
                 .team_name(concertDTO.getTeam_name())
                 .date(concertDTO.getDate())
                 .place(concertDTO.getPlace())
@@ -50,7 +53,6 @@ public class ConcertEntity extends BaseEntity {
                 .filepath(concertDTO.getFilepath())
                 .build();
     }
-
 
 
 }

@@ -1,9 +1,12 @@
 package com.min.prodosing.dto;
 
 import com.min.prodosing.entity.ConcertEntity;
+import com.min.prodosing.entity.MemberEntity;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.sql.Date;
 
 @Getter
@@ -14,6 +17,7 @@ import java.sql.Date;
 @Builder
 public class ConcertDTO {
     private Long concert_id;
+    private String title;
     private String team_name;
     private Date date;
     private String place;
@@ -24,10 +28,16 @@ public class ConcertDTO {
     private String filename;
     private String filepath;
 
+    public ConcertDTO(String team_name, Date date){
+        this.team_name = team_name;
+        this.date = date;
+    }
+
 
     public static ConcertDTO toConcertDTO(ConcertEntity concertEntity) {
         return ConcertDTO.builder()
                 .concert_id(concertEntity.getConcert_id())
+                .title(concertEntity.getTitle())
                 .team_name(concertEntity.getTeam_name())
                 .date(concertEntity.getDate())
                 .place(concertEntity.getPlace())
@@ -39,4 +49,6 @@ public class ConcertDTO {
                 .filepath(concertEntity.getFilepath())
                 .build();
     }
+
+
 }

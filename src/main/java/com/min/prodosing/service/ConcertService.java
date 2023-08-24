@@ -25,7 +25,7 @@ public class ConcertService {
         Optional<MemberEntity> byUserid = memberRepository.findByUserid(userid);
         MemberEntity memberEntity = byUserid.get();
 
-        return memberEntity.getTeam_name();
+        return memberEntity.getTeamname();
 
     }
     
@@ -41,6 +41,7 @@ public class ConcertService {
 
     }
 
+    //공연목록
     public List<ConcertDTO> concertList() {
         List<ConcertEntity> concertEntityList = concertRepository.findAll();
         List<ConcertDTO> concertDTOList = new ArrayList<>();
@@ -51,6 +52,7 @@ public class ConcertService {
         return concertDTOList;
     }
 
+    //공연상세정보
     public ConcertDTO concertInfo(Long concertId) {
         Optional<ConcertEntity> concertEntity = concertRepository.findById(concertId);
         return ConcertDTO.toConcertDTO(concertEntity.get());

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/concertInfo/concertInfo.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <title>공연상세정보</title>
 </head>
 <header>
@@ -20,21 +21,18 @@
         </div>
         <div class="txt">
             <div class="tit">
-                <h2 class="t">
-                    연극 &lt; 2시 22분 - A GHOST STORY &gt;
+                <h2 class="t" th:text="${concert.title}">
                 </h2>
 
             </div>
             <ul class="detail">
-                <li><span class="dt">날짜</span><span th:text="${concert.date}"></span></li>
-                <li><span class="dt">장소</span>  세종M씨어터</li>
-                <li><span class="dt">시간</span> 화-금 7시30분 / 토-일 2시, 6시30분 / 월 공연 없음  * 8/15(화) 2시22분 공연&nbsp;(공연시간 : 130  분 / 인터미션 : 15 분)
-
-                </li>
-                <li><span class="dt">연령</span> 14세 이상 관람가 (2010년생까지 관람가능)&nbsp;</li>
-                <li><span class="dt">티켓</span> VIP석 90,000원 / R석 70,000원 / S석 50,000원 / R 시야제한석 60,000원&nbsp;</li>
-
-                <li><span class="dt">문의</span> 티켓 예매 문의 전화 : 세종문화티켓 02-399-1000  / 기획사 문의 전화 : 신시컴퍼니 02- 577-1987</li>
+                <li><span class="dt">날짜</span><span class="dt2" th:text="${concert.date}"></span></li>
+                <li><span class="dt">시간</span><span class="dt2" th:text="${concert.start_time}"></span></li>
+                <li><span class="dt">장소</span><span class="dt2" th:text="${concert.place}"></span></li>
+                <li><span class="dt">인원</span><span class="dt2" th:text="|${concert.stage_size}명|"></span></li>
+                <li><span class="dt">티켓</span><span class="dt2" th:text="|${concert.price}원|"></span></li>
+                <li style="border:0"><span class="dt">공연설명</span><br>
+                    <div id="note" th:utext="${#strings.replace(concert.note, nlString, '&lt;br /&gt;')}"></div></li>
 
             </ul>
         </div>

@@ -13,10 +13,12 @@ body {
 .sv_top .poster_new img{width: 100%;display: block;}
 .sv_top .txt{min-height:350px; flex:1; margin-left: 50px}
 .sv_top .tit{position: relative;padding-right: 187px;}
-.sv_top .tit .t{font-size: 30px;;font-size: 1.875rem;display: block;margin-bottom: 1em;letter-spacing: -0.05em;line-height: 1.35;}
+.sv_top .tit .t{font-size: 30px;;font-size: 1.875rem;display: block;margin-bottom: 3em;letter-spacing: -0.05em;line-height: 1.35;}
 .sv_top .detail{font-size: 0.938em;}
-.sv_top .detail > li{position: relative;border-bottom: 1px solid #ddd;;padding: 0.8em 0 0.8em 3.533em}
-.sv_top .detail .dt{position: absolute;left: 0;top:0.8em}
+.sv_top .detail > li{position: relative;border-bottom: 1px solid #ddd;padding: 0.8em 0 0.8em 3.533em; margin-bottom: 30px; font-size:15px}
+.sv_top .detail .dt{position: absolute;left: 0;top:0.8em; font-size:18px; display:inline-block; padding-right:20px; border-right:1px solid #ddd;}
 .sv_top .sns{position: absolute;right: 0;top:0;text-align: right;}
 .sv_top .sns button{margin-left: 3px;}
 .sv_top .sns button img{display: block;}
+.dt2{padding-left:30px}
+#note {position: absolute;left: 0; width:100%; border-bottom:1px solid #ddd; margin-top:10px; margin-left:5px}

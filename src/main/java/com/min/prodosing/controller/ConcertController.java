@@ -33,6 +33,10 @@ public class ConcertController {
     //공연등록
     @PostMapping("register")
     public String register(ConcertDTO concertDTO, Model model) {
+        if("" == concertDTO.getTitle()) {
+            concertDTO.setTitle(concertDTO.getTeam_name()+"님의 공연");
+        }
+
         boolean result = concertService.concertReg(concertDTO);
 
         if(result == true) {
@@ -47,8 +51,8 @@ public class ConcertController {
     }
 
     //공연목록
-    @GetMapping("schedule")
-    public String schedule(Model model) {
+    @GetMapping("concertList")
+    public String concertList(Model model) {
         List<ConcertDTO> concertDTOList = concertService.concertList();
 
         String nlString = System.getProperty("line.separator").toString();
@@ -62,6 +66,10 @@ public class ConcertController {
     @GetMapping("concertInfo")
     public String concertInfo(Long concert_id, Model model) {
         ConcertDTO concertDTO = concertService.concertInfo(concert_id);
+
+        String nlString = System.getProperty("line.separator").toString();
+        model.addAttribute("nlString", nlString);
+
         model.addAttribute("concert", concertDTO);
         return "artist/concertInfo";
     }
