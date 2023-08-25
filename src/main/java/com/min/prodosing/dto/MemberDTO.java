@@ -30,14 +30,11 @@ public class MemberDTO {
     private String email_site;
     private String career;
     private String favorite;
+    private String orgfilename;
     private String filename;
     private String filepath;
     private String status;
 
-
-    public MemberDTO(String team_name){
-        this.team_name = team_name;
-    }
 
     public static MemberDTO toMemberDTO(MemberEntity memberEntity) {
         return MemberDTO.builder()
@@ -52,6 +49,7 @@ public class MemberDTO {
                 .email(memberEntity.getEmail())
                 .career(memberEntity.getCareer())
                 .favorite(memberEntity.getFavorite())
+                .orgfilename(memberEntity.getOrgfilename())
                 .filename(memberEntity.getFilename())
                 .filepath(memberEntity.getFilepath())
                 .status(memberEntity.getStatus())

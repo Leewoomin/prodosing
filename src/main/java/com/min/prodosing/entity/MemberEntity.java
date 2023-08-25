@@ -36,6 +36,7 @@ public class MemberEntity extends BaseEntity{
     @ColumnDefault("F")
     private String career;
     private String favorite;
+    private String orgfilename;
     private String filename;
     private String filepath;
     private String status;
@@ -54,6 +55,7 @@ public class MemberEntity extends BaseEntity{
                 .email(memberDTO.getEmail())
                 .career(memberDTO.getCareer())
                 .favorite(memberDTO.getFavorite())
+                .orgfilename(memberDTO.getOrgfilename())
                 .filename(memberDTO.getFilename())
                 .filepath(memberDTO.getFilepath())
                 .status(memberDTO.getStatus())

@@ -33,23 +33,36 @@ public class ArtistController {
         Page<MemberEntity> artistList = null;
         List<ConcertDTO> concertDate = artistService.concertDate();
 
+        //검색어 있는지 여부
         if(searchKeyword == null) {
             artistList = artistService.artistList(pageable);
         }else {
             artistList = artistService.artistSearchList(searchKeyword, pageable);
         }
 
+        int totalPageCount = artistList.getTotalPages();
+        int startPage = 0;
+        int nowPage = artistList.getPageable().getPageNumber();
+        int pagingNumber = nowPage / 5;
+            if(pagingNumber==0){
+                startPage = 1;
+            }else {
+                startPage = (pagingNumber*5) + 1;
+            }
+        int endPage = startPage + 4;
+            if(endPage > artistList.getTotalPages()) {
+                endPage = artistList.getTotalPages();
+            }
 
-        int nowPage = artistList.getPageable().getPageNumber() + 1;
-        int startPage = Math.max(nowPage - 4, 1);
-        int endPage = Math.min(nowPage + 5, artistList.getTotalPages());
 
         model.addAttribute("artistList", artistList);
         model.addAttribute("dateList", concertDate);
         model.addAttribute("nowPage", nowPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
+        model.addAttribute("pagingNumber", pagingNumber);
         model.addAttribute("searchKeyword", searchKeyword);
+        model.addAttribute("totalPageCount", totalPageCount);
 
         return "artist/artistList";
     }

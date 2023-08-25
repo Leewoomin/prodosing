@@ -20,7 +20,7 @@
 </div>
 <form name="artistSearch" action="/artistList" method="get" onsubmit="return submitForm()">
     <div class="search">
-        <input type="text" name="searchKeyword" id="artistSearch" placeholder="아티스트 검색" th:value="${searchKeyword}">
+        <input type="text" name="searchKeyword" id="artistSearch" placeholder="팀명을 검색해보세요." th:value="${searchKeyword}">
         <input type="image" id="searchimg" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
     </div>
 </form>
@@ -57,11 +57,17 @@
     <td colspan="5" class="tablefoot"></td>
     </tfoot>
 </table>
-<div id="paging">
-    <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
-        <a th:if="${page != nowPage}" th:href="@{artistList(page = ${page-1})}" th:text="${page}" style="color: black"></a>
-        <strong th:if="${page == nowPage}" th:text="${page}" style="color: red"></strong>
-    </th:block>
+<div class="page_wrap">
+    <div class="page_nation">
+        <a class="arrow pprev" th:href="@{artistList(page=0, searchKeyword = ${param.searchKeyword})}"></a>
+        <a class="prev" th:href="@{artistList(page= ${(pagingNumber*5)-1}, searchKeyword = ${param.searchKeyword})}"></a>
+        <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+            <a th:if="${page != nowPage+1}" th:href="@{artistList(page = ${page-1}, searchKeyword = ${param.searchKeyword})}" th:text="${page}"></a>
+            <a class="active" th:if="${page == nowPage+1}" th:text="${page}"></a>
+        </th:block>
+        <a class="next" th:href="@{artistList(page= ${(pagingNumber+1)*5}, searchKeyword = ${param.searchKeyword})}"></a>
+        <a class="arrow nnext" th:href="@{artistList(page = ${totalPageCount-1}, searchKeyword = ${param.searchKeyword})}"></a>
+    </div>
 </div>
 </body>
 

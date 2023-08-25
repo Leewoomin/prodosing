@@ -3,20 +3,28 @@ package com.min.prodosing.controller;
 import com.min.prodosing.dto.MemberDTO;
 import com.min.prodosing.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService memberService;
+
+    @Value("${upload.path}") // application.properties에서 설정된 경로
+    private String uploadPath;
 
     @GetMapping("/join")
     public String join() {
@@ -139,7 +147,27 @@ public class MemberController {
     }
 
     @PostMapping("/artistJoin")
-    public String artistJoin(MemberDTO memberDTO, Model model) {
+    public String artistJoin(MemberDTO memberDTO, Model model, @RequestParam("file") MultipartFile file) throws IOException {
+        //팀프로필사진
+        if(file == null || file.isEmpty()){
+
+        }else {
+            String orgFileName = file.getOriginalFilename();
+            String uuid = UUID.randomUUID().toString();
+            //확장자 추출
+            String extension = orgFileName.substring(orgFileName.lastIndexOf("."));
+            String saveFileName = uuid + extension;
+            String filePath = uploadPath + saveFileName;
+            file.transferTo(new File(filePath));
+
+            memberDTO.setOrgfilename(orgFileName);
+            memberDTO.setFilename(saveFileName);
+            memberDTO.setFilepath(filePath);
+        }
+
+
+
+
         //성별
         String gender = memberDTO.getGender();
         if(gender.equals("남자")) {
