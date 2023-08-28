@@ -6,12 +6,13 @@ import com.min.prodosing.entity.MemberEntity;
 import com.min.prodosing.repository.ConcertRepository;
 import com.min.prodosing.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -49,6 +50,19 @@ public class ConcertService {
         for(ConcertEntity concertEntity: concertEntityList) {
             concertDTOList.add(ConcertDTO.toConcertDTO(concertEntity));
         }
+
+        return concertDTOList;
+    }
+
+    //공연 검색목록
+    public List<ConcertDTO> concertList(String searchDate) {
+        List<ConcertEntity> concertEntityList = concertRepository.findAllByDateContaining(searchDate);
+        List<ConcertDTO> concertDTOList = new ArrayList<>();
+
+        for(ConcertEntity concertEntity: concertEntityList) {
+            concertDTOList.add(ConcertDTO.toConcertDTO(concertEntity));
+        }
+
         return concertDTOList;
     }
 

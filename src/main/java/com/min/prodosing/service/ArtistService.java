@@ -30,12 +30,12 @@ public class ArtistService {
     //아티스트 검색목록
     public Page<MemberEntity> artistSearchList(String searchKeyword, Pageable pageable) {
         String status = "A";
-        return memberRepository.findByStatusAndTeamnameContaining(status, searchKeyword, pageable );
+        return memberRepository.findByStatusAndTeamnameContaining(status, searchKeyword, pageable);
     }
 
     //아티스트 목록(공연예정일)
     public List<ConcertDTO> concertDate() {
-        List<ConcertEntity> entityList = concertRepository.findAllGroupByTeam_NameOrderByDate();
+        List<ConcertEntity> entityList = concertRepository.findGroupByTeamNameOrderByDate();
         List<ConcertDTO> dateList = new ArrayList<>();
 
         for(ConcertEntity concertEntity: entityList) {

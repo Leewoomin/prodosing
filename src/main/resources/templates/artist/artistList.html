@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/artistList.css" />
     <link rel="stylesheet" href="css/footer.css" />
     <link rel="stylesheet" href="css/artistList.css" />
+    <link rel="stylesheet" href="css/paging.css" />
     <!--Jquery-->
     <script
             src="https://code.jquery.com/jquery-3.7.0.min.js">
@@ -18,7 +19,7 @@
 <div>
     <th:block th:include="header"></th:block>
 </div>
-<form name="artistSearch" action="/artistList" method="get" onsubmit="return submitForm()">
+<form name="artistSearch" action="/artistList" method="get">
     <div class="search">
         <input type="text" name="searchKeyword" id="artistSearch" placeholder="팀명을 검색해보세요." th:value="${searchKeyword}">
         <input type="image" id="searchimg" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
@@ -41,7 +42,7 @@
     </thead>
     <tbody>
     <tr th:each="artist: ${artistList}">
-        <td><img src="https://i.postimg.cc/yYYd1HV1/katara.jpg" alt="img"></td>
+        <td><img th:src="|images/artistTeamProfile/${artist.filename}|" alt="img" th:if="${artist.filename != null}"></td>
         <td class="allCell" th:text="${artist.teamname}">Ninja</td>
         <td class="firstCell" th:each="date: ${dateList}" th:if="${artist.teamname == date.team_name}" th:text="${date.date}"></td>
         <td class="secondCell">-</td>
@@ -76,10 +77,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     var rows = document.querySelectorAll("tbody tr");
     var allCell = document.querySelectorAll(".allCell")
-
-
-
-console.log(allCell.length);
 
     for (var i = 0; i < allCell.length; i++) {
     rows.forEach(function(row) {

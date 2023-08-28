@@ -24,13 +24,20 @@
 <div class="content-wrapper">
 <!--    <div th:if="${contentList}"></div>-->
     <div th:unless="${concertList}" id="concert">등록된 공연이 없습니다.</div>
+<form action="/concertList" method="get">
+    <div id="search">
+        <span id="searchDate">날짜로 검색하기</span>
+        <input type="date" name="searchDate" th:value="${searchDate}">
+        <input type="image" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+    </div>
+</form>
     <div class="inner-container container">
 <div class="row">
 <div class="blog-masonry masonry-true">
     <div th:each="concert: ${concertList}">
             <div class="post-masonry col-md-4 col-sm-6">
             <div class="blog-thumb">
-                <img src="images/blog/blog-1.jpg" alt="">
+                <img src="images/sample.jpg" alt="">
                 <div class="overlay-b">
                     <div class="overlay-inner">
                         <a th:href="@{/concertInfo(concert_id=${concert.concert_id})}" class="fa fa-link"></a>

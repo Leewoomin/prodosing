@@ -3,6 +3,38 @@
 	http://www.templatemo.com/preview/templatemo_423_artcore
 */
 
+#search {
+    position: relative;
+    width: 350px;
+    margin-left: 280px;
+    border: 1px solid #bbb;
+    border-radius: 8px;
+    background-color: white;
+}
+
+#searchDate {
+    padding: 19px 20px;
+    margin: 30px 0;
+    text-align: center;
+    background-color: white;
+    font-size: 15px;
+}
+
+input[type=date] {
+    border: none;
+    padding: 10px 12px;
+}
+
+#search input[type=image] {
+    position : absolute;
+    width: 20px;
+    top: 17px;
+    right: 15px;
+    margin: 0;
+}
+
+
+
 .blog-masonry {
     margin-top: 50px;
 }
@@ -200,7 +232,7 @@ h1, h2, h3, h4, h5, h6 {
   box-sizing: border-box;
 }
 
-button,
+/*button,
 input,
 select,
 textarea {
@@ -208,7 +240,7 @@ textarea {
   outline: 0;
   padding: 10px 12px;
   color: #aaaaaa;
-}
+}*/
 button:focus,
 input:focus,
 select:focus,

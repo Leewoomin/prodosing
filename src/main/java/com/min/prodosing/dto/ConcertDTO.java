@@ -7,7 +7,7 @@ import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import java.sql.Date;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -19,7 +19,7 @@ public class ConcertDTO {
     private Long concert_id;
     private String title;
     private String team_name;
-    private Date date;
+    private String date;
     private String place;
     private String start_time;
     private String stage_size;
@@ -28,17 +28,14 @@ public class ConcertDTO {
     private String filename;
     private String filepath;
 
-    public ConcertDTO(String team_name, Date date){
-        this.team_name = team_name;
-        this.date = date;
-    }
+
 
 
     public static ConcertDTO toConcertDTO(ConcertEntity concertEntity) {
         return ConcertDTO.builder()
                 .concert_id(concertEntity.getConcert_id())
                 .title(concertEntity.getTitle())
-                .team_name(concertEntity.getTeam_name())
+                .team_name(concertEntity.getTeamname())
                 .date(concertEntity.getDate())
                 .place(concertEntity.getPlace())
                 .start_time(concertEntity.getStart_time())
