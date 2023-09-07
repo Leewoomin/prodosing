@@ -29,7 +29,6 @@ public class ConcertEntity extends BaseEntity {
     private String title;
     @Column(name = "team_name")
     private String teamname;
-    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
     private String date;
     private String place;
     private String start_time;
@@ -37,23 +36,25 @@ public class ConcertEntity extends BaseEntity {
     @ColumnDefault("0")
     private String price;
     private String note;
+    private String orgfilename;
     private String filename;
     private String filepath;
+    private String createDate;
 
 
     public static ConcertEntity toConcertEntity(ConcertDTO concertDTO) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
         return ConcertEntity.builder()
                 .concert_id(concertDTO.getConcert_id())
                 .title(concertDTO.getTitle())
                 .teamname(concertDTO.getTeam_name())
-                .date(formatter.format(concertDTO.getDate()))
+                .date(concertDTO.getDate())
                 .place(concertDTO.getPlace())
                 .start_time(concertDTO.getStart_time())
                 .stage_size(concertDTO.getStage_size())
                 .price(concertDTO.getPrice())
                 .note(concertDTO.getNote())
+                .orgfilename(concertDTO.getOrgfilename())
                 .filename(concertDTO.getFilename())
                 .filepath(concertDTO.getFilepath())
                 .build();

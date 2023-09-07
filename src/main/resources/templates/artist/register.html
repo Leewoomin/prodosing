@@ -25,7 +25,14 @@
     <hr style="margin-top: 0px;"></div>
   <div style="clear:both;"></div>
 
-  <form name="register" action="/register" id="frm" method="post">
+  <form name="register" action="/register" id="frm" method="post" enctype="multipart/form-data">
+    <div class="row g-3 mt-5">
+      <div class="col-auto">
+        <div class="textBox" readonly> 공연 포스터를 등록해주세요.</div>
+        <div><input name="file" id="filename" type="file" accept="image/*"></div>
+      </div>
+    </div>
+
     <div class="row g-3 mt-5">
       <div class="col-auto">
         <input name="team_name" type="text" th:value="${teamname}" class="textBox" readonly>

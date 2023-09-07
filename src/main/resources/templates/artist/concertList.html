@@ -14,15 +14,17 @@
     http://www.templatemo.com/preview/templatemo_423_artcore
     -->
     <link rel="stylesheet" href="css/concertList/bootstrap.css">
-    <link rel="stylesheet" href="css/concertList/templatemo-style.css">
+    <link rel="stylesheet" href="css/concertList/concertList.css">
     <script src="js/concertList/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
 </head>
 <header>
     <th:block th:include="header"></th:block>
 </header>
 <body id="body">
+<div class="head">
+    <div><h1><b>공 연 일 정</b></h1></div>
+</div>
 <div class="content-wrapper">
-<!--    <div th:if="${contentList}"></div>-->
     <div th:unless="${concertList}" id="concert">등록된 공연이 없습니다.</div>
 <form action="/concertList" method="get">
     <div id="search">
@@ -37,13 +39,14 @@
     <div th:each="concert: ${concertList}">
             <div class="post-masonry col-md-4 col-sm-6">
             <div class="blog-thumb">
-                <img src="images/sample.jpg" alt="">
+                <img th:if="${concert.filename != null}" th:src="|images/concertPoster/${concert.filename}|" alt="">
                 <div class="overlay-b">
                     <div class="overlay-inner">
                         <a th:href="@{/concertInfo(concert_id=${concert.concert_id})}" class="fa fa-link"></a>
                     </div>
                 </div>
             </div>
+                <a th:href="@{/concertInfo(concert_id=${concert.concert_id})}">
             <div class="blog-body">
                 <div class="box-content">
                     <h3 class="post-title" th:text="${concert.title}"></h3>
@@ -53,6 +56,7 @@
 <!--                    <p th:text="${concert.note}"></p>-->
                 </div>
             </div>
+                </a>
         </div><!-- /.post-masonry -->
 
     </div>

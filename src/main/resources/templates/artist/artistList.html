@@ -6,7 +6,6 @@
     <!--BootStap-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="css/artistList.css" />
     <link rel="stylesheet" href="css/footer.css" />
     <link rel="stylesheet" href="css/artistList.css" />
     <link rel="stylesheet" href="css/paging.css" />
@@ -19,6 +18,10 @@
 <div>
     <th:block th:include="header"></th:block>
 </div>
+<div class="head">
+    <div><h1><b>아 티 스 트 목 록</b></h1></div>
+</div>
+<div id="wrap">
 <form name="artistSearch" action="/artistList" method="get">
     <div class="search">
         <input type="text" name="searchKeyword" id="artistSearch" placeholder="팀명을 검색해보세요." th:value="${searchKeyword}">
@@ -61,14 +64,15 @@
 <div class="page_wrap">
     <div class="page_nation">
         <a class="arrow pprev" th:href="@{artistList(page=0, searchKeyword = ${param.searchKeyword})}"></a>
-        <a class="prev" th:href="@{artistList(page= ${(pagingNumber*5)-1}, searchKeyword = ${param.searchKeyword})}"></a>
+        <a class="prev" th:href="@{artistList(page= ${prevBtn}, searchKeyword = ${param.searchKeyword})}"></a>
         <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
             <a th:if="${page != nowPage+1}" th:href="@{artistList(page = ${page-1}, searchKeyword = ${param.searchKeyword})}" th:text="${page}"></a>
             <a class="active" th:if="${page == nowPage+1}" th:text="${page}"></a>
         </th:block>
-        <a class="next" th:href="@{artistList(page= ${(pagingNumber+1)*5}, searchKeyword = ${param.searchKeyword})}"></a>
+        <a class="next" th:href="@{artistList(page= ${nextBtn}, searchKeyword = ${param.searchKeyword})}"></a>
         <a class="arrow nnext" th:href="@{artistList(page = ${totalPageCount-1}, searchKeyword = ${param.searchKeyword})}"></a>
     </div>
+</div>
 </div>
 </body>
 

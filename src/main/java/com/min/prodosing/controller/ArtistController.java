@@ -53,6 +53,8 @@ public class ArtistController {
             if(endPage > artistList.getTotalPages()) {
                 endPage = artistList.getTotalPages();
             }
+        int nextBtn = Math.min((pagingNumber+1)*5, totalPageCount-1);
+        int prevBtn = Math.max((pagingNumber*5)-1 , 0);
 
 
         model.addAttribute("artistList", artistList);
@@ -63,6 +65,8 @@ public class ArtistController {
         model.addAttribute("pagingNumber", pagingNumber);
         model.addAttribute("searchKeyword", searchKeyword);
         model.addAttribute("totalPageCount", totalPageCount);
+        model.addAttribute("nextBtn", nextBtn);
+        model.addAttribute("prevBtn", prevBtn);
 
         return "artist/artistList";
     }

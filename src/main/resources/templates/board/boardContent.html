@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>자유게시판</title>
+  <!--BootStap-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/board/boardContent.css" />
+  <!--Jquery-->
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+<div>
+  <th:block th:include="header"></th:block>
+</div>
+<div class="head">
+  <div><h1><b>자 유 게 시 판</b></h1></div>
+</div>
+
+<div class="content">
+  <table>
+    <thead>
+    <tr>
+      <th colspan="3" th:text="${content.title}"></th>
+    </tr>
+    </thead>
+    <tr>
+      <td id="contenthead" colspan="3" th:text="|작성자: ${content.user_id}&nbsp;&nbsp;&nbsp; 작성일자: ${content.writedate}&nbsp;&nbsp;&nbsp; 조회수: ${content.view}|"></td>
+    </tr>
+    <tr>
+      <td colspan="3" th:utext="${content.content}"></td>
+    </tr>
+  </table>
+
+  <input type="hidden" id="board_id" th:value="${content.board_id}">
+  <input type="hidden" id="user_id" th:value="${content.user_id}">
+
+  <div class="reply">댓글</div>
+  <div id="replyDiv" class="mb-3" th:if="${content.user_id != null}">
+    <textarea class="form-control" name="re_content" id="re_content" placeholder="댓글을 작성해 보세요."></textarea>
+    <button class="custom-btn btn-3" onclick="replyWrite()"><span>작성하기</span></button>
+  </div>
+  <input type="hidden" th:if="${content.user_id == null}" name="re_content">
+  <hr>
+
+  <div id="replyContent"></div>
+
+</div><!-- content -->
+</div><!-- wrap -->
+
+<!--게시글 본문페이지 로딩시 댓글리스트 가져옴-->
+<script th:inline="javascript">
+  window.onload = function() {
+    const content = $("[name=re_content]").val();
+    const userid = document.getElementById("user_id").value;
+    const boardid = document.getElementById("board_id").value;
+
+
+  $.ajax({
+      // 요청방식: post, url: "boardReply", 데이터: content
+      type: "post",
+      url: "/boardReList",
+      data: {
+          "board_id": boardid,
+          "user_id": userid,
+          "content": content
+      },
+      dataType: 'json',
+      async: false,
+      success: function(data) {
+        var replyContent = document.getElementById("replyContent");
+        var str = "";
+        $.each(data, function(index, reply) {
+
+            str += '<div id="contentDiv"><span>' + reply.user_id + '</span>';
+            str += '<span id="writeDate">' + reply.createwrite + '</span>';
+            str += '<p>' + reply.content + '</p></div>';
+          });
+          replyContent.innerHTML = str;
+      },
+      error: function(err) {
+          console.log("에러발생", err);
+      }
+  });
+}
+</script>
+
+
+<!--작성한 댓글 추가 후 댓글리스트 가져옴-->
+<script th:inline="javascript">
+function replyWrite() {
+  const content = document.getElementById("re_content").value;
+    const userid = document.getElementById("user_id").value;
+    const boardid = document.getElementById("board_id").value;
+    const re_content = document.getElementById("re_content");
+  $.ajax({
+      // 요청방식: post, url: "boardReply", 데이터: content
+      type: "post",
+      url: "/boardReList",
+      data: {
+          "board_id": boardid,
+          "user_id": userid,
+          "content": content
+      },
+      dataType: 'json',
+      async: false,
+      success: function(data) {
+        var replyContent = document.getElementById("replyContent");
+        var str = "";
+        re_content.value = '';
+        $.each(data, function(index, reply) {
+
+            str += '<span>' + reply.user_id + '</span>';
+            str += '<span id="writeDate">' + reply.createwrite + '</span>';
+            str += '<p>' + reply.content + '</p>';
+          });
+          replyContent.innerHTML = str;
+      },
+      error: function(err) {
+          console.log("에러발생", err);
+      }
+  });
+}
+</script>
+
+
+<!-- Footer -->
+<footer id="footer">
+  <div>
+    <th:block th:include="footer"></th:block>
+  </div>
+</footer>
+</body>
+</html>

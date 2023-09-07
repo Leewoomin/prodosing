@@ -1,23 +1,21 @@
 package com.min.prodosing.controller;
 
 import com.min.prodosing.dto.ConcertDTO;
-import com.min.prodosing.dto.MemberDTO;
-import com.min.prodosing.entity.ConcertEntity;
-import com.min.prodosing.repository.MemberRepository;
+
 import com.min.prodosing.service.ConcertService;
 import com.min.prodosing.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import javax.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
@@ -25,6 +23,9 @@ public class ConcertController {
 
     private final ConcertService concertService;
     private final MemberService memberService;
+
+    @Value("${upload.concert}")
+    private String uploadConcert;
 
 
     //공연등록 Form
@@ -37,9 +38,30 @@ public class ConcertController {
 
     //공연등록
     @PostMapping("register")
-    public String register(ConcertDTO concertDTO, Model model) {
+    public String register(ConcertDTO concertDTO, Model model, @RequestParam("file") MultipartFile file) throws IOException {
+        //공연날짜 String으로 변환
+        concertDTO.setDate(concertDTO.getDate().toString());
+
+        //공연제목 유무
         if("" == concertDTO.getTitle()) {
             concertDTO.setTitle(concertDTO.getTeam_name()+"님의 공연");
+        }
+
+        //공연포스터 유무
+        if(file == null || file.isEmpty()){
+
+        }else {
+            String orgFileName = file.getOriginalFilename();
+            String uuid = UUID.randomUUID().toString();
+            //확장자 추출
+            String extension = orgFileName.substring(orgFileName.lastIndexOf("."));
+            String saveFileName = uuid + extension;
+            String filePath = uploadConcert + saveFileName;
+            file.transferTo(new File(filePath));
+
+            concertDTO.setOrgfilename(orgFileName);
+            concertDTO.setFilename(saveFileName);
+            concertDTO.setFilepath(filePath);
         }
 
         boolean result = concertService.concertReg(concertDTO);

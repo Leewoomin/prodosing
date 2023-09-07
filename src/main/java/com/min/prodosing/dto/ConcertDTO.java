@@ -1,5 +1,7 @@
 package com.min.prodosing.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.min.prodosing.entity.BaseEntity;
 import com.min.prodosing.entity.ConcertEntity;
 import com.min.prodosing.entity.MemberEntity;
 import lombok.*;
@@ -25,9 +27,9 @@ public class ConcertDTO {
     private String stage_size;
     private String price;
     private String note;
+    private String orgfilename;
     private String filename;
     private String filepath;
-
 
 
 
@@ -42,6 +44,7 @@ public class ConcertDTO {
                 .stage_size(concertEntity.getStage_size())
                 .price(concertEntity.getPrice())
                 .note(concertEntity.getNote())
+                .orgfilename(concertEntity.getOrgfilename())
                 .filename(concertEntity.getFilename())
                 .filepath(concertEntity.getFilepath())
                 .build();

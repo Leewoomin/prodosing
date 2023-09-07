@@ -165,9 +165,6 @@ public class MemberController {
             memberDTO.setFilepath(filePath);
         }
 
-
-
-
         //성별
         String gender = memberDTO.getGender();
         if(gender.equals("남자")) {
@@ -177,7 +174,6 @@ public class MemberController {
         }else {
             memberDTO.setGender("S");
         }
-
 
         //생년월일 년+월+일
         if(null == memberDTO.getBirth_y() ) {
@@ -190,7 +186,6 @@ public class MemberController {
             memberDTO.setBirth_d("");
         }
         String birth = memberDTO.getBirth_y().concat( memberDTO.getBirth_m().concat(memberDTO.getBirth_d()));
-
 
         //email id+사이트
         String email;

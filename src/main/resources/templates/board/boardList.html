@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>자유게시판</title>
+    <!--BootStap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/board/boardList.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="css/paging.css" />
+    <!--Jquery-->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+</head>
+<body>
+<div>
+    <th:block th:include="header"></th:block>
+</div>
+<div class="head">
+    <div><h1><b>자 유 게 시 판</b></h1></div>
+</div>
+<div class="writeBtn">
+    <button type="button" th:onclick="|location.href='@{/boardWrite}'|" class="btn btn-outline-info"
+    th:if="${session.loginId != null} ">글 작성하기</button>
+</div>
+<table>
+    <thead>
+    <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일자</th>
+        <th>조회수</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="board: ${boardList}">
+        <td th:text="${board.boardid}"></td>
+        <td><a th:href="@{|/content/${board.boardid}|}" th:text="${board.title}"></a></td>
+        <td th:text="${board.user_id}"></td>
+        <td th:text="${board.writedate}"></td>
+        <td th:text="${board.view}"></td>
+    </tr>
+    </tbody>
+</table>
+<div class="page_wrap">
+    <div class="page_nation">
+        <a class="arrow pprev" th:href="@{boardList(page=0)}"></a>
+        <a class="prev" th:href="@{boardList(page= ${prevBtn})}"></a>
+        <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+            <a th:if="${page != nowPage+1}" th:href="@{boardList(page = ${page-1})}" th:text="${page}"></a>
+            <a class="active" th:if="${page == nowPage+1}" th:text="${page}"></a>
+        </th:block>
+        <a class="next" th:href="@{boardList(page= ${nextBtn})}"></a>
+        <a class="arrow nnext" th:href="@{boardList(page = ${totalPageCount-1})}"></a>
+    </div>
+</div>
+</body>
+<!-- Footer -->
+<footer id="footer">
+    <div>
+        <th:block th:include="footer"></th:block>
+    </div>
+</footer>
+</html>

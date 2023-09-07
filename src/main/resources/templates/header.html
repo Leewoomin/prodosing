@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Header</title>
-  <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="/css/header.css" />
 </head>
 <body>
 <div id="headerdiv">
 
-    <a th:href="index"><div id="left">Prodosing</div></a>
+    <a href="/index"><div id="left">Prodosing</div></a>
 
     <div id="center">
         <ul class="menu align-center expanded text-center SMN_effect-34">
-            <li><a href="artistList"><span>아티스트 목록</span></a></li>
-            <li><a href="concertList"><span>공연일정</span></a></li>
-            <li><a href="board"><span>자유게시판</span></a></li>
+            <li><a href="/artistList"><span>아티스트 목록</span></a></li>
+            <li><a href="/concertList"><span>공연일정</span></a></li>
+            <li><a href="/boardList"><span>자유게시판</span></a></li>
             <li th:if="${session.status=='A'}"><a th:href="@{/register(userid=${session.loginId})}"><span>공연등록</span></a></li>
         </ul>
     </div>
@@ -22,10 +22,10 @@
     <div id="right">
         <span th:if="${session.loginId} and ${#strings.equals(session.status,'F')}" th:text="|${session.loginId}님 환영합니다.|"></span>
         <span th:if="${session.loginId} and ${#strings.equals(session.status,'A')}" th:text="|${session.loginId} 아티스트님 환영합니다.|"></span>
-        <button type="button" th:if="${session.loginId}" class="btn btn-outline-danger btn-sm" id="logoutbtn" th:onclick="|location.href='@{logout}'|" >로그아웃</button>
-        <button type="button" th:unless="${session.loginId}" class="btn btn-outline-info btn-sm" id="login" th:onclick="|location.href='@{login}'|" >로그인</button>
-        <button type="button" th:unless="${session.loginId}" class="btn btn-outline-info btn-sm" id="join" th:onclick="|location.href='@{join}'|" >회원가입</button>
-        <button type="button" th:unless="${session.loginId}" class="btn btn-outline-info btn-sm" id="joinart" th:onclick="|location.href='@{artistJoin}'|" >아티스트로 가입하기</button>
+        <button type="button" th:if="${session.loginId}" class="btn btn-outline-danger btn-sm" id="logoutbtn" th:onclick="|location.href='@{/logout}'|" >로그아웃</button>
+        <button type="button" th:unless="${session.loginId}" class="btn btn-outline-info btn-sm" id="login" th:onclick="|location.href='@{/login}'|" >로그인</button>
+        <button type="button" th:unless="${session.loginId}" class="btn btn-outline-info btn-sm" id="join" th:onclick="|location.href='@{/join}'|" >회원가입</button>
+        <button type="button" th:unless="${session.loginId}" class="btn btn-outline-info btn-sm" id="joinart" th:onclick="|location.href='@{/artistJoin}'|" >아티스트로 가입하기</button>
     </div>
 </div>
 </body>

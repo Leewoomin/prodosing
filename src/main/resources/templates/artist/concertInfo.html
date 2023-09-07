@@ -10,13 +10,14 @@
     <th:block th:include="header"></th:block>
 </header>
 <body>
+<div id="wrap">
 <div class="sv_top">
     <div class="in">
         <div class="poster">
             <!-- 포스터 테스트 -->
             <!-- <img src="/static/portal/img/thumb/poster_temp.jpg" alt="" /> -->
 
-            <img src="images/sample.jpg" alt="">
+            <img th:src="|images/concertPoster/${concert.filename}|">
 
         </div>
         <div class="txt">
@@ -32,13 +33,13 @@
                 <li><span class="dt">인원</span><span class="dt2" th:text="|${concert.stage_size}명|"></span></li>
                 <li><span class="dt">티켓</span><span class="dt2" th:text="|${concert.price}원|"></span></li>
                 <li style="border:0"><span class="dt">공연설명</span><br>
-                    <div id="note" th:utext="${#strings.replace(concert.note, nlString, '&lt;br /&gt;')}"></div></li>
-
+                    <div id="note" th:utext="${#strings.replace(concert.note, nlString, '&lt;br /&gt;')}"></div>
+                </li>
             </ul>
         </div>
     </div>
 </div>
-
+</div
 </body>
 
 <!-- Footer -->
