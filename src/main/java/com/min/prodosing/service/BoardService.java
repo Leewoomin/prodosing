@@ -68,4 +68,29 @@ public class BoardService {
         }
         return boardReDTOList;
     }
+
+    @Transactional
+    public boolean boardUpdate(BoardDTO boardDTO) {
+        Long boardid = boardDTO.getBoard_id();
+        String title = boardDTO.getTitle();
+        String content = boardDTO.getContent();
+
+        try {
+            boardRepository.boardUpdate(boardid, title, content);
+            return true;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean boardDelete(Long boardid) {
+        try{
+            boardRepository.deleteById(boardid);
+            return true;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

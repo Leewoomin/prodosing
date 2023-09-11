@@ -1,39 +1,40 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>게시판 글쓰기</title>
-    <!--BootStap-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/board/boardWrite.css" />
-    <!--Jquery-->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <meta charset="UTF-8">
+  <title>게시글 수정하기</title>
+  <!--BootStap-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/board/boardWrite.css" />
+  <!--Jquery-->
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 
-    <!-- Summer Note -->
-    <script src="js/summerNote/summernote-lite.js"></script>
-    <script src="js/summerNote/summernote-ko-KR.js"></script>
-    <link rel="stylesheet" href="js/summerNote/summernote-lite.css">
+  <!-- Summer Note -->
+  <script src="/js/summerNote/summernote-lite.js"></script>
+  <script src="/js/summerNote/summernote-ko-KR.js"></script>
+  <link rel="stylesheet" href="/js/summerNote/summernote-lite.css">
 </head>
 <body>
 <div>
-    <th:block th:include="header"></th:block>
+  <th:block th:include="header"></th:block>
 </div>
 <div class="head">
-    <div><h1><b>게 시 글 작 성</b></h1></div>
+  <div><h1><b>게 시 글 수 정</b></h1></div>
 </div>
-<form id="summernoteForm" action="/boardWrite" method="post" enctype="multipart/form-data">
+<form id="summernoteForm" action="/board/update" method="post" enctype="multipart/form-data">
 
-<!--Summer Note-->
-<div class="container">
+  <!--Summer Note-->
+  <div class="container">
     <div class="title">
-        <input type="text" id="title" name="title" placeholder=" 제목을 입력하세요.">
+      <input type="hidden" name="board_id" th:value="${content.board_id}">
+      <input type="text" id="title" name="title" th:value="${content.title}">
     </div>
-    <textarea class="summernote" id="summernote" name="content"></textarea>
-</div>
-    <input type="hidden" id="orgfilename" name="orgfilename">
-    <input type="hidden" id="filename" name="filename">
-    <input type="hidden" id="filepath" name="filepath">
-<script>
+    <textarea class="summernote" id="summernote" name="content" th:utext="${content.content}"></textarea>
+  </div>
+  <input type="hidden" id="orgfilename" name="orgfilename">
+  <input type="hidden" id="filename" name="filename">
+  <input type="hidden" id="filepath" name="filepath">
+  <script>
 
     $('.summernote').summernote({
         height: 450,
@@ -70,17 +71,17 @@ function uploadSummernoteImageFile(file, el) {
                     },
                 });
             }
+
 </script>
-<div class="writeBtn">
-    <button type="submit" class="btn btn-outline-info">작성하기</button>
-    <button type="button" class="btn btn-outline-info" th:onclick="|location.href='@{/boardList}'|">취소하기</button>
-</div>
+  <div class="writeBtn">
+    <button type="submit" class="btn btn-outline-info">수정완료</button>
+  </div>
 </form>
 </body>
 <!-- Footer -->
 <footer id="footer">
-    <div>
-        <th:block th:include="footer"></th:block>
-    </div>
+  <div>
+    <th:block th:include="footer"></th:block>
+  </div>
 </footer>
 </html>

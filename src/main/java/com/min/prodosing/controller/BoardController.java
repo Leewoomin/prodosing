@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
@@ -66,7 +67,7 @@ public class BoardController {
         if(endPage > boardList.getTotalPages()) {
             endPage = boardList.getTotalPages();
         }
-        session.getAttribute("loginId");
+//        session.getAttribute("loginId");
         model.addAttribute("boardList", boardList);
         model.addAttribute("nowPage", nowPage);
         model.addAttribute("startPage", startPage);
@@ -141,25 +142,23 @@ public class BoardController {
         //조회수 증가 중복 막기
         if(cookies != null) {
             for(Cookie cook: cookies) {
-                System.out.println("cookieValue00000= "+cook.getValue());
-                System.out.println("cookieName00000= "+cook.getName());
-                cookie = cook;
-                if(cookie.getName().equals("visited")) {
+                if(!"JSESSIONID".equals(cook.getName())) {
+                    cookie = cook;
+                    if (cookie.getName().equals("visited")) {
 
-
-                    if(!cookie.getValue().contains("[" + String.valueOf(boardid) + "]")) {
-                        System.out.println("cookieValue1111= "+cookie.getValue());
-                        System.out.println("cookieName1111= "+cookie.getName());
-                        cookie.setValue(cookie.getValue() + "[" + String.valueOf(boardid) + "]");
-                        response.addCookie(cookie);
-                        System.out.println("cookieValue2222= "+cookie.getValue());
-                        System.out.println("cookieName2222= "+cookie.getName());
+                        if (!cookie.getValue().contains("[" + String.valueOf(boardid) + "]")) {
+                            cookie.setValue(cookie.getValue() + "[" + String.valueOf(boardid) + "]");
+                            response.addCookie(cookie);
+                            boardService.updateView(boardid);
+                        }
+                    } else {
+                        Cookie newCookie = new Cookie("visited", "[" + String.valueOf(boardid) + "]");
+                        response.addCookie(newCookie);
                         boardService.updateView(boardid);
                     }
                 }
             }
         }else {
-            System.out.println("bbbbbbbbbbbbbbbbb");
             Cookie newCookie = new Cookie("visited", "[" + String.valueOf(boardid) + "]");
             response.addCookie(newCookie);
             boardService.updateView(boardid);
@@ -195,6 +194,36 @@ public class BoardController {
     }
 
 
+    //게시글 수정 Form
+    @GetMapping("/board/updateForm")
+    public String boardUpdateForm(@RequestParam("boardid") Long boardid, Model model) {
+        BoardDTO boardDTO = boardService.boardContent(boardid);
+        model.addAttribute("content", boardDTO);
+        return "board/boardUpdate";
+    }
 
+    @PostMapping("/board/update")
+    public String boardUpdate(BoardDTO boardDTO, Model model) {
+        boolean result = boardService.boardUpdate(boardDTO);
+        if(result) {
+            model.addAttribute("message", "게시글 수정이 완료 되었습니다.");
+            model.addAttribute("searchUrl", "/content/" + boardDTO.getBoard_id());
+            return "/message/message";
+        }else {
+            model.addAttribute("message", "게시글 수정을 실패 했습니다.");
+            return "message/message_fail";
+        }
+    }
 
+    // 게시글 삭제
+
+    @PostMapping("/board/delete")
+    public @ResponseBody String boardDelete(@RequestParam("board_id") Long board_id) {
+        System.out.println("@@@@@@@@@@@@"+board_id);
+        boolean result = boardService.boardDelete(board_id);
+        if(result) {
+            return "게시글이 삭제 되었습니다.";
+        }
+        return "게시글 삭제를 실패했습니다";
+    }
 }

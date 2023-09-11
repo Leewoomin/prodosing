@@ -22,7 +22,11 @@
   <table>
     <thead>
     <tr>
-      <th colspan="3" th:text="${content.title}"></th>
+      <th colspan="2" th:text="${content.title}"></th>
+      <th>
+        <button type="button" class="btn btn-outline-danger mr-2 btn float-right" th:if="${session.loginId} == ${content.user_id}" onclick="boardDelete()">삭제</button>
+        <button class="btn btn-outline-primary mr-2 btn float-right" th:if="${session.loginId} == ${content.user_id}" th:onclick="|location.href='@{/board/updateForm(boardid=${content.board_id})}'|">수정</button>
+      </th>
     </tr>
     </thead>
     <tr>
@@ -48,6 +52,33 @@
 
 </div><!-- content -->
 </div><!-- wrap -->
+
+<!--게시글삭제-->
+<script>
+  function boardDelete() {
+     board_id = $('#board_id').val();
+
+  if(confirm("정말 삭제 하시겠습니까?") == true) {
+    $.ajax({
+        type: "post",
+        url: "/board/delete",
+        data: {
+          "board_id": board_id
+        },
+        async: false,
+        success: function(data) {
+        console.log("삭제완료");
+          alert(data);
+          location.href = "/boardList";
+        },
+        error: function(err) {
+                console.log("에러발생", err);
+            }
+      });
+}
+
+  }
+</script>
 
 <!--게시글 본문페이지 로딩시 댓글리스트 가져옴-->
 <script th:inline="javascript">
