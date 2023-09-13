@@ -1,23 +1,17 @@
 package com.min.prodosing.controller;
 
-import com.google.gson.JsonObject;
 import com.min.prodosing.dto.BoardDTO;
 import com.min.prodosing.dto.BoardReDTO;
 import com.min.prodosing.entity.BoardEntity;
 import com.min.prodosing.entity.MemberEntity;
 import com.min.prodosing.service.BoardService;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.io.FileUtils;
-import org.aspectj.util.FileUtil;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -219,7 +213,6 @@ public class BoardController {
 
     @PostMapping("/board/delete")
     public @ResponseBody String boardDelete(@RequestParam("board_id") Long board_id) {
-        System.out.println("@@@@@@@@@@@@"+board_id);
         boolean result = boardService.boardDelete(board_id);
         if(result) {
             return "게시글이 삭제 되었습니다.";

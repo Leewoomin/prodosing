@@ -2,6 +2,7 @@ package com.min.prodosing.controller;
 
 import com.min.prodosing.dto.MemberDTO;
 import com.min.prodosing.service.MemberService;
+import com.min.prodosing.service.RegisterMail;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 
 @Controller
@@ -22,6 +25,7 @@ import java.util.UUID;
 public class MemberController {
 
     private final MemberService memberService;
+    private final RegisterMail registerMail;
 
     @Value("${upload.path}") // application.properties에서 설정된 경로
     private String uploadPath;
@@ -215,6 +219,20 @@ public class MemberController {
         }
     }
 
+    // 메일인증
+    @ResponseBody
+    @PostMapping("/emailAuth")
+    public String emailAuth(MemberDTO memberDTO) throws MessagingException, UnsupportedEncodingException {
+        String userEmail;
+            if (memberDTO.getEmail_site().equals("직접입력")) {
+                userEmail = memberDTO.getEmail();
+            } else {
+                userEmail = memberDTO.getEmail() + "@" + memberDTO.getEmail_site();
+            }
+
+        String code = registerMail.sendMessage(userEmail);
+        return code;
+    }
 
 
 
