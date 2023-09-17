@@ -5,6 +5,7 @@ import com.min.prodosing.service.MemberService;
 import com.min.prodosing.service.RegisterMail;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,7 @@ public class MemberController {
 
     private final MemberService memberService;
     private final RegisterMail registerMail;
+    private final PasswordEncoder passwordEncoder;
 
     @Value("${upload.path}") // application.properties에서 설정된 경로
     private String uploadPath;
@@ -38,6 +40,9 @@ public class MemberController {
     @PostMapping("/join")
     public String join(MemberDTO memberDTO, Model model) {
 
+        //비밀번호 암호화
+        memberDTO.setPassword(passwordEncoder.encode(memberDTO.getPassword()));
+
         //성별
         String gender = memberDTO.getGender();
         if(gender.equals("남자")) {
@@ -47,7 +52,6 @@ public class MemberController {
         }else {
             memberDTO.setGender("S");
         }
-
 
         //생년월일 년+월+일
         if(null == memberDTO.getBirth_y() ) {
@@ -60,7 +64,6 @@ public class MemberController {
             memberDTO.setBirth_d("");
         }
         String birth = memberDTO.getBirth_y().concat( memberDTO.getBirth_m().concat(memberDTO.getBirth_d()));
-
 
         //email id+사이트
         String email;
@@ -83,6 +86,7 @@ public class MemberController {
         }else {
             memberDTO.setFavorite(null);
         }
+
         String result = memberService.join(memberDTO);
 
         if(result.equals("success")){
@@ -122,7 +126,6 @@ public class MemberController {
     //로그인
     @PostMapping("login")
     public String login(MemberDTO memberDTO, HttpSession session, Model model) {
-        System.out.println("status= "+memberDTO.getStatus());
         String loginResult = memberService.login(memberDTO);
 
         if(loginResult != null) {
