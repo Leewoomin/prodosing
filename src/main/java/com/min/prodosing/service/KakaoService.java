@@ -7,8 +7,6 @@ import com.min.prodosing.entity.MemberEntity;
 import com.min.prodosing.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.Id;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;

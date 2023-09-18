@@ -1,10 +1,8 @@
 package com.min.prodosing.controller;
 
 import com.min.prodosing.dto.ConcertDTO;
-import com.min.prodosing.dto.MemberDTO;
 import com.min.prodosing.entity.MemberEntity;
 import com.min.prodosing.service.ArtistService;
-import com.min.prodosing.service.ConcertService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

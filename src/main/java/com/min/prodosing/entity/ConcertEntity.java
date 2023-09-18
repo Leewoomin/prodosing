@@ -1,19 +1,13 @@
 package com.min.prodosing.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.min.prodosing.dto.ConcertDTO;
-import com.min.prodosing.dto.MemberDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Entity
 @Getter

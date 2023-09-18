@@ -11,7 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -69,6 +68,7 @@ public class BoardService {
         return boardReDTOList;
     }
 
+    //게시글 수정
     @Transactional
     public boolean boardUpdate(BoardDTO boardDTO) {
         Long boardid = boardDTO.getBoard_id();
@@ -84,6 +84,7 @@ public class BoardService {
         }
     }
 
+    //게시글 삭제
     public boolean boardDelete(Long boardid) {
         try{
             boardRepository.deleteById(boardid);

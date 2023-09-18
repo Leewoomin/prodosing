@@ -1,6 +1,5 @@
 package com.min.prodosing.entity;
 
-import com.min.prodosing.dto.BoardDTO;
 import com.min.prodosing.dto.BoardReDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

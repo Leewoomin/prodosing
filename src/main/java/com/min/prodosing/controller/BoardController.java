@@ -3,7 +3,6 @@ package com.min.prodosing.controller;
 import com.min.prodosing.dto.BoardDTO;
 import com.min.prodosing.dto.BoardReDTO;
 import com.min.prodosing.entity.BoardEntity;
-import com.min.prodosing.entity.MemberEntity;
 import com.min.prodosing.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.*;
@@ -73,14 +71,14 @@ public class BoardController {
         return "board/boardList";
     }
 
-    //글쓰기 form
+    //게시판 글쓰기 form
     @GetMapping("/boardWrite")
     public String boardWriteForm() {
 
         return "board/boardWrite";
     }
 
-    //글쓰기
+    //게시판 글쓰기
     @PostMapping("/boardWrite")
     public String boardWrite(BoardDTO boardDTO, Model model, HttpSession session) {
         boardDTO.setUser_id((String) session.getAttribute("loginId"));
@@ -196,6 +194,7 @@ public class BoardController {
         return "board/boardUpdate";
     }
 
+    //게시물 수정
     @PostMapping("/board/update")
     public String boardUpdate(BoardDTO boardDTO, Model model) {
         boolean result = boardService.boardUpdate(boardDTO);
@@ -210,7 +209,6 @@ public class BoardController {
     }
 
     // 게시글 삭제
-
     @PostMapping("/board/delete")
     public @ResponseBody String boardDelete(@RequestParam("board_id") Long board_id) {
         boolean result = boardService.boardDelete(board_id);

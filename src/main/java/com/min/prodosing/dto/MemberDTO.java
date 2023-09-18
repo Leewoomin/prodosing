@@ -1,12 +1,7 @@
 package com.min.prodosing.dto;
 
-import com.min.prodosing.entity.ConcertEntity;
 import com.min.prodosing.entity.MemberEntity;
 import lombok.*;
-
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import java.sql.Date;
 
 @Getter
 @Setter
