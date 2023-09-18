@@ -21,11 +21,14 @@
 
     <div id="right">
         <span th:if="${session.loginId} and ${#strings.equals(session.status,'F')}" th:text="|${session.loginId}님 환영합니다.|"></span>
+        <span th:if="${session.kakaoId}" th:text="|${session.kakaoId}님 환영합니다.|"></span>
         <span th:if="${session.loginId} and ${#strings.equals(session.status,'A')}" th:text="|${session.loginId} 아티스트님 환영합니다.|"></span>
         <button type="button" th:if="${session.loginId}" class="btn btn-outline-danger btn-sm" id="logoutbtn" th:onclick="|location.href='@{/logout}'|" >로그아웃</button>
-        <button type="button" th:unless="${session.loginId}" class="btn btn-outline-info btn-sm" id="login" th:onclick="|location.href='@{/login}'|" >로그인</button>
-        <button type="button" th:unless="${session.loginId}" class="btn btn-outline-info btn-sm" id="join" th:onclick="|location.href='@{/join}'|" >회원가입</button>
-        <button type="button" th:unless="${session.loginId}" class="btn btn-outline-info btn-sm" id="joinart" th:onclick="|location.href='@{/artistJoin}'|" >아티스트로 가입하기</button>
+        <button type="button" th:if="${session.kakaoId}" class="btn btn-outline-danger btn-sm"
+                th:onclick="|location.href='https://kauth.kakao.com/oauth/logout?client_id=208fc9a7feea00a7916e920118a58dc9&logout_redirect_uri=http://localhost:9090/kakao/logout'|" >로그아웃</button>
+        <button type="button" th:unless="${session.loginId} or ${session.kakaoId}" class="btn btn-outline-info btn-sm" id="login" th:onclick="|location.href='@{/login}'|" >로그인</button>
+        <button type="button" th:unless="${session.loginId} or ${session.kakaoId}" class="btn btn-outline-info btn-sm" id="join" th:onclick="|location.href='@{/join}'|" >회원가입</button>
+        <button type="button" th:unless="${session.loginId} or ${session.kakaoId}" class="btn btn-outline-info btn-sm" id="joinart" th:onclick="|location.href='@{/artistJoin}'|" >아티스트로 가입하기</button>
     </div>
 </div>
 </body>

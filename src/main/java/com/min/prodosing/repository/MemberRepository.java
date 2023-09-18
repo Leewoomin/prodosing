@@ -23,4 +23,7 @@ public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
 
     //아티스트 검색목록
     Page<MemberEntity> findByStatusAndTeamnameContaining(String status, String searchKeyword, Pageable pageable);
+
+    //카카오아이디 가입유무 조회
+    Optional<MemberEntity> findByKakaoid(String kakaoid);
 }

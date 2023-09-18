@@ -147,6 +147,9 @@ public class MemberController {
         return "message/message";
     }
 
+    //카카오 로그아웃
+
+
     //아티스트 등록
     @GetMapping("artistJoin")
     public String artistJoin() {

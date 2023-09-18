@@ -40,6 +40,7 @@ public class MemberEntity extends BaseEntity{
     private String filename;
     private String filepath;
     private String status;
+    private String kakaoid;
 
 
     public static MemberEntity toMemberEntity(MemberDTO memberDTO) {
@@ -59,6 +60,7 @@ public class MemberEntity extends BaseEntity{
                 .filename(memberDTO.getFilename())
                 .filepath(memberDTO.getFilepath())
                 .status(memberDTO.getStatus())
+                .kakaoid(memberDTO.getKakaoid())
                 .build();
     }
 

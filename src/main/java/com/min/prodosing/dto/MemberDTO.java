@@ -34,6 +34,7 @@ public class MemberDTO {
     private String filename;
     private String filepath;
     private String status;
+    private String kakaoid;
 
 
     public static MemberDTO toMemberDTO(MemberEntity memberEntity) {
@@ -53,6 +54,7 @@ public class MemberDTO {
                 .filename(memberEntity.getFilename())
                 .filepath(memberEntity.getFilepath())
                 .status(memberEntity.getStatus())
+                .kakaoid(memberEntity.getKakaoid())
                 .build();
     }
 

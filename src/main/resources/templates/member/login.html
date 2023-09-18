@@ -14,7 +14,6 @@
             crossorigin="anonymous">
     </script>
     <link rel="stylesheet" href="/css/login.css">
-    <link rel="stylesheet" href="css/footer.css" />
 </head>
 <header>
     <th:block th:include="header"></th:block>
@@ -29,6 +28,9 @@
                 <input type="password" name="password" placeholder="Password">
                 <button type="submit" class="form_btn" style="width: 112px;">로그인</button>
                 <button type="button" class="form_btn" th:onclick="|location.href='@{join}'|">회원가입</button>
+                <button type="button" class="kakaoLoginBtn">
+                    <img src="/images/kakao_login_btn.png" th:onclick="|location.href='https://kauth.kakao.com/oauth/authorize?client_id=208fc9a7feea00a7916e920118a58dc9&redirect_uri=http://localhost:9090/kakao/callback&response_type=code'|">
+                </button>
             </form>
     </div>
 </div>
