@@ -38,9 +38,9 @@ public class KakaoService {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
-            sb.append("&client_id=208fc9a7feea00a7916e920118a58dc9"); // TODO REST_API_KEY 입력
-            sb.append("&redirect_uri=http://localhost:9090/kakao/callback"); // TODO 인가코드 받은 redirect_uri 입력
-            sb.append("&client_secret=kgao2FTUbymcW6CYftybSyGniWj8O35R");
+            sb.append("&client_id=208fc9a7feea00a7916e920118a58dc9"); // REST_API_KEY 입력
+            sb.append("&redirect_uri=http://localhost:9090/kakao/callback"); // 인가코드 받은 redirect_uri 입력
+            sb.append("&client_secret=kgao2FTUbymcW6CYftybSyGniWj8O35R"); //client secret key 입려
             sb.append("&code=" + code);
             bw.write(sb.toString());
             bw.flush();

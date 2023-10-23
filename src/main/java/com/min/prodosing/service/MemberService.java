@@ -46,6 +46,7 @@ public class MemberService {
             MemberEntity memberEntity = byUserid.get();
             //암호화된 비밀번호와 일치여부 확인(matches사용)
             if(passwordEncoder.matches(memberDTO.getPassword(), memberEntity.getPassword())){
+//            if(memberDTO.getPassword().equals(memberEntity.getPassword())){
                 return memberEntity.getStatus();
             }else {
                 return null;

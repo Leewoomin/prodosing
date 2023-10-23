@@ -11,9 +11,16 @@ public class WebConfig implements WebMvcConfigurer {
     @Value("${upload.summer}")
     private String uploadsummer;
 
+    @Value("${upload.path}")
+    private String uploadteamprofile;
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/summernoteImg/**")
-                .addResourceLocations("file:///"+uploadsummer);
+                .addResourceLocations("file:///" + uploadsummer);
+
+        registry.addResourceHandler("/images/artistTeamProfile/**")
+                .addResourceLocations("file:///" + uploadteamprofile);
     }
+
 }

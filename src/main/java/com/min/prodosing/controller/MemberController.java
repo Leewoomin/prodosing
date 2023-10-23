@@ -42,16 +42,6 @@ public class MemberController {
         //비밀번호 암호화
         memberDTO.setPassword(passwordEncoder.encode(memberDTO.getPassword()));
 
-        //성별
-        String gender = memberDTO.getGender();
-        if(gender.equals("남자")) {
-            memberDTO.setGender("M");
-        }else if(gender.equals("여자")){
-            memberDTO.setGender("W");
-        }else {
-            memberDTO.setGender("S");
-        }
-
         //생년월일 년+월+일
         if(null == memberDTO.getBirth_y() ) {
             memberDTO.setBirth_y("");
@@ -157,6 +147,9 @@ public class MemberController {
 
     @PostMapping("/artistJoin")
     public String artistJoin(MemberDTO memberDTO, Model model, @RequestParam("file") MultipartFile file) throws IOException {
+        //비밀번호 암호화
+        memberDTO.setPassword(passwordEncoder.encode(memberDTO.getPassword()));
+
         //팀프로필사진
         if(file == null || file.isEmpty()){
 
@@ -172,16 +165,6 @@ public class MemberController {
             memberDTO.setOrgfilename(orgFileName);
             memberDTO.setFilename(saveFileName);
             memberDTO.setFilepath(filePath);
-        }
-
-        //성별
-        String gender = memberDTO.getGender();
-        if(gender.equals("남자")) {
-            memberDTO.setGender("M");
-        }else if(gender.equals("여자")){
-            memberDTO.setGender("W");
-        }else {
-            memberDTO.setGender("S");
         }
 
         //생년월일 년+월+일
